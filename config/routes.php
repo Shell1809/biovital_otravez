@@ -117,6 +117,10 @@ return [
      'api/recetas/mis-recetas' => ['controller' => 'RecetaController', 'action' => 'misRecetas', 'method' => 'POST', 'rol' => 'paciente'],
      'api/recetas/estadisticas' => ['controller' => 'RecetaController', 'action' => 'estadisticas', 'method' => 'POST', 'rol' => 'administrador'],
 
+    // ==================== DOCUMENTOS MÉDICOS ====================
+     'documentos' => ['controller' => 'DocumentoController', 'action' => 'index', 'rol' => ['paciente', 'asistente']],
+     'documentos/ver/:tipo/:id' => ['controller' => 'DocumentoController', 'action' => 'ver', 'rol' => ['paciente', 'asistente']],
+
 
     // ==================== CSRF ====================
     'api/csrf/token' => ['controller' => 'CSRFController', 'action' => 'getToken', 'method' => 'POST', 'auth' => false],

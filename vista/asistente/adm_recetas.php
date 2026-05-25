@@ -300,6 +300,9 @@ if($_SESSION['us_tipo'] == 3){
         <button class="btn btn-success" id="btnNuevaReceta">
             <i class="fas fa-plus"></i> Nueva Receta
         </button>
+        <a class="btn btn-secondary ml-2" href="<?php echo APP_URL; ?>/documentos">
+            <i class="fas fa-file-medical"></i> Documentos médicos
+        </a>
     </div>
 </div>
     <section class="content">

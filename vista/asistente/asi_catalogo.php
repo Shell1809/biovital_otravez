@@ -106,10 +106,10 @@ $nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
                         <h3>Recetas</h3>
                         <p>Gestiona y visualiza las recetas médicas del sistema.</p>
                     </a>
-                    <a href="#" class="bv-dash-card asistente bv-animate bv-animate-delay-2">
-                        <div class="bv-card-icon"><i class="fas fa-procedures"></i></div>
-                        <h3>Triaje</h3>
-                        <p>Registra signos vitales y motivos de consulta previos a la atención.</p>
+                    <a href="<?php echo APP_URL; ?>/documentos" class="bv-dash-card asistente bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="fas fa-file-medical"></i></div>
+                        <h3>Documentos médicos</h3>
+                        <p>Visualiza recipes, constancias, justificativos, diagnósticos y laboratorios para imprimir o guardar en PDF.</p>
                     </a>
                     <a href="<?php echo APP_URL; ?>/perfil" class="bv-dash-card asistente bv-animate bv-animate-delay-3">
                         <div class="bv-card-icon"><i class="fas fa-user-cog"></i></div>

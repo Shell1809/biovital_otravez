@@ -68,6 +68,11 @@ $nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
                             <i class="nav-icon fas fa-prescription-bottle-alt"></i><p>Mis Recetas</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?php echo APP_URL; ?>/documentos" class="nav-link">
+                            <i class="nav-icon fas fa-file-medical"></i><p>Documentos médicos</p>
+                        </a>
+                    </li>
                     <li class="nav-header">Citas</li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -128,10 +133,10 @@ $nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
                         <h3>Historial Médico</h3>
                         <p>Accede a tus reportes, recetas e informes médicos previos.</p>
                     </a>
-                    <a href="#" class="bv-dash-card bv-animate bv-animate-delay-2">
-                        <div class="bv-card-icon"><i class="far fa-calendar-check"></i></div>
-                        <h3>Mis Citas</h3>
-                        <p>Revisa tus próximas citas o programa una nueva consulta.</p>
+                    <a href="<?php echo APP_URL; ?>/documentos" class="bv-dash-card bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="fas fa-file-medical-alt"></i></div>
+                        <h3>Documentos médicos</h3>
+                        <p>Visualiza tus recipes, constancias, justificativos, diagnósticos y estudios de laboratorio.</p>
                     </a>
                     <a href="<?php echo APP_URL; ?>/perfil" class="bv-dash-card bv-animate bv-animate-delay-3">
                         <div class="bv-card-icon"><i class="fas fa-user-cog"></i></div>

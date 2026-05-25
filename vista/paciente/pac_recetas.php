@@ -75,6 +75,12 @@ if($_SESSION['us_tipo'] != 1 || $_SESSION['rol'] != 'paciente'){
                         <p>Mis Recetas</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/documentos" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical"></i>
+                        <p>Documentos médicos</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
