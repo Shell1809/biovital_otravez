@@ -1,7 +1,18 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_consultorio_crear.php
 // Contenido principal para la creación de consultorios
 // Este archivo se renderiza dentro del layout base dashboard.php
+=======
+<<<<<<< HEAD
+=======
+// NO iniciar sesión aquí - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Administrador';
@@ -178,6 +189,7 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -186,6 +198,251 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
                 <h1><i class="fas fa-plus-circle"></i> Nuevo Consultorio</h1>
             </div>
         </div>
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Administrador | Nuevo Consultorio</title>
+    
+    <style>
+        .form-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .form-card .card-header {
+            background: white;
+            border-bottom: 2px solid var(--bv-primary);
+            padding: 1.25rem 1.5rem;
+        }
+        .form-card .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--bv-dark);
+        }
+        .form-card .card-header h3 i {
+            color: var(--bv-primary);
+            margin-right: 0.5rem;
+        }
+        .form-card .card-body {
+            padding: 1.5rem;
+        }
+        .preview-card {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border-radius: 16px;
+            border: 1px solid #eef2f6;
+            transition: all 0.3s;
+        }
+        .preview-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1.5px solid #e2e8f0;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--bv-primary);
+            box-shadow: 0 0 0 3px rgba(0,119,182,0.1);
+        }
+        .checkbox-group {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #fafbfc;
+        }
+        .checkbox-group .form-check {
+            margin-bottom: 0.6rem;
+            padding-left: 1.8rem;
+        }
+        .checkbox-group .form-check-input {
+            margin-left: -1.5rem;
+        }
+        .checkbox-group .form-check-label {
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .required-field::after {
+            content: " *";
+            color: #dc3545;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--bv-primary), var(--bv-accent));
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,119,182,0.3);
+        }
+        .btn-cancel {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-cancel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(108,117,125,0.3);
+        }
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem;
+        }
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--bv-dark);
+            margin: 1.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eef2f6;
+        }
+        .section-title i {
+            color: var(--bv-primary);
+            margin-right: 0.5rem;
+        }
+        .preview-nombre {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--bv-primary);
+        }
+        .preview-info {
+            font-size: 0.85rem;
+            color: var(--bv-text-light);
+            margin-bottom: 0.5rem;
+        }
+        .badge-preview {
+            background: #e8f4f8;
+            color: #0d9488;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .row-selects {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+<<<<<<< HEAD
+        <span class="brand-text font-weight-light">BioVital</span>
+=======
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+<<<<<<< HEAD
+                </li>               
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                 <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link active">
+=======
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link">
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 
@@ -208,6 +465,7 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="row">
             <div class="col-md-8">
                 <!-- Formulario Principal -->
@@ -219,6 +477,27 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
                         <!-- Alertas -->
                         <div class="alert alert-success alert-custom" id="alertExito" style="display:none;">
                             <i class="fas fa-check-circle"></i> <span id="exitoMensaje"></span>
+=======
+    <section class="content">
+        <div class="container-fluid">
+            
+            <!-- Welcome Banner -->
+            <div class="bv-welcome-banner admin bv-animate">
+                <h2><i class="fas fa-building"></i> Registrar Nuevo Consultorio</h2>
+                <p>Complete el formulario para agregar un nuevo consultorio al sistema.</p>
+                <div class="bv-role-tag"><i class="fas fa-hospital-user"></i> Infraestructura</div>
+            </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Formulario Principal -->
+                    <div class="form-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clipboard-list"></i> Información Básica</h3>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                         </div>
                         <div class="alert alert-danger alert-custom" id="alertError" style="display:none;">
                             <i class="fas fa-exclamation-circle"></i> <span id="errorMensaje"></span>

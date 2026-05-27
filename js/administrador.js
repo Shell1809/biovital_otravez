@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+/**
+ * administrador.js - Funcionalidades para el panel del administrador
+ * CORREGIDO - Soluciona problemas de edición y guardado de datos
+ */
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 $(document).ready(function() {
     // ==================== VERIFICACIÓN INICIAL ====================

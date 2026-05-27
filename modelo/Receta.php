@@ -85,13 +85,32 @@ function obtenerRecetasPorPaciente($id_paciente) {
         error_log("Error en obtenerRecetasPorPaciente: " . $e->getMessage());
         return array();
     }
+<<<<<<< HEAD
 }    
+=======
+<<<<<<< HEAD
+}    
+=======
+}
+
+    
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     // Crear nueva receta
    function crear_receta($nombre_medicamento, $marca, $cantidad, $dosis, $instrucciones, $id_paciente, $id_medico, $fecha_receta) {
         if($this->acceso === null) {
             echo 'error_conexion';
             return;
+<<<<<<< HEAD
         }        
+=======
+<<<<<<< HEAD
+        }        
+=======
+        }
+        
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         try {
             $sql = "INSERT INTO recetas(nombre_medicamento, marca, cantidad, dosis, instrucciones, id_paciente, id_medico, fecha_receta, estado) 
                     VALUES (:nombre_medicamento, :marca, :cantidad, :dosis, :instrucciones, :id_paciente, :id_medico, :fecha_receta, 1)";

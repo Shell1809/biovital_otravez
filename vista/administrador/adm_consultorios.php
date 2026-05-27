@@ -1,7 +1,18 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_consultorios.php
 // Contenido principal para la gestión de consultorios
 // Este archivo se renderiza dentro del layout base dashboard.php
+=======
+<<<<<<< HEAD
+=======
+// NO iniciar sesión aquí - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Administrador';
@@ -113,6 +124,7 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -122,6 +134,320 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
             </div>
         </div>
     </div>
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Administrador | Consultorios</title>
+    
+    <style>
+        .consultorio-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .consultorio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+        .consultorio-card .card-header {
+            background: linear-gradient(135deg, var(--bv-primary), var(--bv-accent));
+            color: white;
+            border: none;
+            padding: 1rem 1.25rem;
+        }
+        .consultorio-card .card-header h5 {
+            font-weight: 600;
+            margin: 0;
+        }
+        .consultorio-card .card-body {
+            padding: 1.25rem;
+        }
+        .consultorio-card .card-footer {
+            background: #f8f9fa;
+            border-top: 1px solid #eef2f6;
+            padding: 0.75rem 1.25rem;
+        }
+        .badge-medicos {
+            background-color: #e8f4f8;
+            color: #0d9488;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-estado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .search-box {
+            max-width: 350px;
+        }
+        .info-box-icon {
+            transition: transform 0.3s;
+        }
+        .info-box:hover .info-box-icon {
+            transform: scale(1.1);
+        }
+        .btn-accion {
+            transition: all 0.2s;
+        }
+        .btn-accion:hover {
+            transform: translateY(-2px);
+        }
+        .ubicacion-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+        .horario-text {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<<<<<<< HEAD
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BioVital</span>
+=======
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+<<<<<<< HEAD
+                </li>               
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                 <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+=======
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link active">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1><i class="fas fa-building"></i> Gestión de Consultorios</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="<?php echo APP_URL; ?>/panel/administrador">Home</a></li>
+                        <li class="breadcrumb-item active">Consultorios</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    <section class="content">
+        <div class="container-fluid">
+            
+            <!-- Welcome Banner (estilo dashboard) -->
+            <div class="bv-welcome-banner admin bv-animate">
+                <h2><i class="fas fa-building"></i> Consultorios Médicos</h2>
+                <p>Gestiona las sedes, horarios y asignación de médicos a cada consultorio.</p>
+                <div class="bv-role-tag"><i class="fas fa-hospital-user"></i> Infraestructura</div>
+            </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            <!-- Stats Cards -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bv-animate bv-animate-delay-1">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-building"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Consultorios</span>
+                            <span class="info-box-number" id="total_consultorios">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bv-animate bv-animate-delay-1">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Activos</span>
+                            <span class="info-box-number" id="total_activos">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bv-animate bv-animate-delay-2">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-md"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Médicos Asignados</span>
+                            <span class="info-box-number" id="total_medicos_asignados">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bv-animate bv-animate-delay-2">
+                        <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-plus-circle"></i></span>
+                        <div class="info-box-content">
+                            <button class="btn btn-primary btn-sm btn-block" id="btnNuevoConsultorio">
+                                <i class="fas fa-plus"></i> Nuevo Consultorio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            <!-- Search Bar -->
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body py-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white"><i class="fas fa-search text-muted"></i></span>
+                                </div>
+                                <input type="text" id="buscar_consultorio" class="form-control" placeholder="Buscar consultorio por nombre, ciudad o dirección...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" id="btnBuscar">
+                                        <i class="fas fa-search"></i> Buscar
+                                    </button>
+                                    <button class="btn btn-outline-secondary" id="btnLimpiarBusqueda" style="display: none;">
+                                        <i class="fas fa-times"></i> Limpiar
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="resultado_busqueda" class="mt-2 text-center" style="display: none;">
+                                <small class="text-muted">
+                                    <i class="fas fa-filter"></i> Mostrando resultados para: 
+                                    <strong id="termino_busqueda" class="text-primary"></strong>
+                                    <a href="#" id="limpiarResultados" class="ml-2 text-danger">
+                                        <i class="fas fa-times-circle"></i> quitar filtro
+                                    </a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de consultorios (Grid estilo dashboard) -->
+            <div class="row" id="contenedor_consultorios">
+                <div class="col-12 text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                    <p class="mt-2">Cargando consultorios...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 </div>
 
 <section class="content">

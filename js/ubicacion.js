@@ -2,7 +2,16 @@
 $(document).ready(function() {
     var API_URL = APP_URL + '/api/ubicacion';
     
+<<<<<<< HEAD
        cargarEstados();
+=======
+<<<<<<< HEAD
+       cargarEstados();
+=======
+    // Cargar estados al iniciar
+    cargarEstados();
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     
     // Evento cambio de estado
     $(document).on('change', '#estado', function() {

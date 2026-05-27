@@ -1,5 +1,9 @@
 <?php
 // ==================== FRONT CONTROLLER ====================
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Detectar entorno
 $environment = getenv('APP_ENV') ?: 'development';
@@ -34,11 +38,28 @@ if (session_status() === PHP_SESSION_NONE) {
         ini_set('session.cookie_samesite', 'Strict');
         ini_set('session.use_strict_mode', 1);
     }
+<<<<<<< HEAD
+=======
+=======
+// Iniciar sesión SOLO UNA VEZ al principio
+if (session_status() === PHP_SESSION_NONE) {
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     session_start();
 }
 
 require_once 'config/app.php';
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// Configuración de errores (desactivar en producción)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 // Constantes de rutas
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT_PATH', dirname(__FILE__));
@@ -47,6 +68,7 @@ define('MODEL_PATH', ROOT_PATH . DS . 'modelo');
 define('VIEW_PATH', ROOT_PATH . DS . 'vista');
 define('API_PATH', ROOT_PATH . DS . 'api');
 define('IMG_PATH', ROOT_PATH . DS . 'img');
+<<<<<<< HEAD
 define('HELPER_PATH', ROOT_PATH . DS . 'helpers');
 
 // ==================== CARGAR HELPERS ====================
@@ -64,6 +86,20 @@ foreach ($helpers as $helper) {
         }
     }
 }
+=======
+<<<<<<< HEAD
+define('HELPER_PATH', ROOT_PATH . DS . 'helpers');
+
+// Cargar helpers necesarios
+if (file_exists(HELPER_PATH . DS . 'AuthHelper.php')) {
+    require_once HELPER_PATH . DS . 'AuthHelper.php';
+}
+if (file_exists(HELPER_PATH . DS . 'ApiResponse.php')) {
+    require_once HELPER_PATH . DS . 'ApiResponse.php';
+}
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Autoloader
 spl_autoload_register(function($className) {
@@ -109,6 +145,10 @@ spl_autoload_register(function($className) {
  * Envía una respuesta JSON estándar
  */
 function jsonResponse($data, $statusCode = 200) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     if (class_exists('ApiResponse')) {
         ApiResponse::send(true, ApiResponse::CODE_SUCCESS, 'Operación exitosa', $data, $statusCode);
     } else {
@@ -117,6 +157,15 @@ function jsonResponse($data, $statusCode = 200) {
         echo json_encode($data);
         exit();
     }
+<<<<<<< HEAD
+=======
+=======
+    http_response_code($statusCode);
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit();
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 }
 
 /**
@@ -166,6 +215,13 @@ if (!file_exists($routesFile)) {
     die("Error: Archivo de rutas no encontrado en: " . $routesFile);
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// Definición de rutas
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 $routes = require_once $routesFile;
 
 /**
@@ -180,6 +236,10 @@ function verificarRol($rolRequerido, $rolUsuario) {
 
 $routeFound = false;
 $routeParams = [];
+<<<<<<< HEAD
+$isApiRoute = false;
+=======
+<<<<<<< HEAD
 $isApiRoute = false;
 
 $pathParts = explode('/', $path);
@@ -187,6 +247,19 @@ $pathParts = explode('/', $path);
 foreach ($routes as $route => $config) {
     $routeParts = explode('/', $route);
     
+=======
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
+
+$pathParts = explode('/', $path);
+
+foreach ($routes as $route => $config) {
+    $routeParts = explode('/', $route);
+    
+<<<<<<< HEAD
+=======
+    // Verificar que tengan la misma cantidad de partes
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     if (count($routeParts) !== count($pathParts)) {
         continue;
     }
@@ -194,12 +267,29 @@ foreach ($routes as $route => $config) {
     $match = true;
     $params = [];
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
     for ($i = 0; $i < count($routeParts); $i++) {
         if (strpos($routeParts[$i], ':') === 0) {
             $paramName = substr($routeParts[$i], 1);
             $params[$paramName] = $pathParts[$i];
             $_GET[$paramName] = $pathParts[$i];
         } 
+=======
+    // Comparar cada parte
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
+    for ($i = 0; $i < count($routeParts); $i++) {
+        if (strpos($routeParts[$i], ':') === 0) {
+            $paramName = substr($routeParts[$i], 1);
+            $params[$paramName] = $pathParts[$i];
+            $_GET[$paramName] = $pathParts[$i];
+        } 
+<<<<<<< HEAD
+=======
+        // Si no es parámetro, debe coincidir exactamente
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         elseif ($routeParts[$i] !== $pathParts[$i]) {
             $match = false;
             break;
@@ -210,6 +300,7 @@ foreach ($routes as $route => $config) {
         $routeFound = true;
         $routeParams = $params;
         
+<<<<<<< HEAD
         // Detectar si es una ruta de API (empieza con 'api/')
         $isApiRoute = (strpos($route, 'api/') === 0);
         
@@ -226,11 +317,39 @@ foreach ($routes as $route => $config) {
                 http_response_code(405);
                 die("Método no permitido");
             }
+=======
+<<<<<<< HEAD
+        // Detectar si es una ruta de API (empieza con 'api/')
+        $isApiRoute = (strpos($route, 'api/') === 0);
+        
+        // Verificar método HTTP
+        if (isset($config['method']) && $config['method'] !== $method) {
+            if ($isApiRoute || $isAjax) {
+                if (class_exists('ApiResponse')) {
+                    ApiResponse::error('Método no permitido', ApiResponse::CODE_SERVER_ERROR, [], 405);
+                } else {
+                    http_response_code(405);
+                    die("Método no permitido");
+                }
+            } else {
+                http_response_code(405);
+                die("Método no permitido");
+            }
+=======
+        // Verificar método HTTP
+        if (isset($config['method']) && $config['method'] !== $method) {
+            jsonResponse(['error' => 'Método no permitido'], 405);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         }
         
         // Verificar autenticación
         if (isset($config['auth']) && $config['auth'] === true) {
             if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol'])) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 if ($isApiRoute || $isAjax) {
                     if (class_exists('ApiResponse')) {
                         ApiResponse::unauthorized('Debe iniciar sesión para acceder a este recurso');
@@ -238,6 +357,13 @@ foreach ($routes as $route => $config) {
                         http_response_code(401);
                         die("No autorizado");
                     }
+<<<<<<< HEAD
+=======
+=======
+                if ($isAjax) {
+                    jsonResponse(['error' => 'Sesión no iniciada'], 401);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 } else {
                     redirect('login');
                 }
@@ -247,6 +373,10 @@ foreach ($routes as $route => $config) {
         // Verificar rol
         if (isset($config['rol'])) {
             if (!isset($_SESSION['rol'])) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 if ($isApiRoute || $isAjax) {
                     if (class_exists('ApiResponse')) {
                         ApiResponse::forbidden('No tiene permisos para acceder a este recurso');
@@ -254,11 +384,22 @@ foreach ($routes as $route => $config) {
                         http_response_code(403);
                         die("Prohibido");
                     }
+<<<<<<< HEAD
+=======
+=======
+                if ($isAjax) {
+                    jsonResponse(['error' => 'No autorizado'], 403);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 } else {
                     redirect('login');
                 }
             }
             if (!verificarRol($config['rol'], $_SESSION['rol'])) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 if ($isApiRoute || $isAjax) {
                     if (class_exists('ApiResponse')) {
                         ApiResponse::forbidden('Rol no autorizado para acceder a este recurso');
@@ -266,6 +407,13 @@ foreach ($routes as $route => $config) {
                         http_response_code(403);
                         die("Prohibido");
                     }
+<<<<<<< HEAD
+=======
+=======
+                if ($isAjax) {
+                    jsonResponse(['error' => 'No tiene permisos'], 403);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 } else {
                     redirect('login');
                 }
@@ -277,6 +425,10 @@ foreach ($routes as $route => $config) {
         $controllerFile = CONTROLLER_PATH . DS . $controllerName . '.php';
         
         if (!file_exists($controllerFile)) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             if ($isApiRoute || $isAjax) {
                 if (class_exists('ApiResponse')) {
                     ApiResponse::serverError("Archivo de controlador no encontrado: {$controllerName}");
@@ -287,11 +439,21 @@ foreach ($routes as $route => $config) {
             } else {
                 die("Error: Archivo de controlador no encontrado: {$controllerName}");
             }
+<<<<<<< HEAD
+=======
+=======
+            jsonResponse(['error' => "Archivo de controlador no encontrado: {$controllerName}"], 500);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         }
         
         require_once $controllerFile;
         
         if (!class_exists($controllerName)) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             if ($isApiRoute || $isAjax) {
                 if (class_exists('ApiResponse')) {
                     ApiResponse::serverError("Controlador '{$controllerName}' no encontrado");
@@ -302,11 +464,21 @@ foreach ($routes as $route => $config) {
             } else {
                 die("Error: Controlador '{$controllerName}' no encontrado");
             }
+<<<<<<< HEAD
+=======
+=======
+            jsonResponse(['error' => "Controlador '{$controllerName}' no encontrado"], 500);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         }
         
         $controller = new $controllerName();
         
         if (!method_exists($controller, $actionName)) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             if ($isApiRoute || $isAjax) {
                 if (class_exists('ApiResponse')) {
                     ApiResponse::serverError("Acción '{$actionName}' no encontrada en {$controllerName}");
@@ -323,10 +495,20 @@ foreach ($routes as $route => $config) {
         // Las rutas API ya manejan su propia salida con ApiResponse
         if (!$isApiRoute) {
             ob_start();
+<<<<<<< HEAD
+=======
+=======
+            jsonResponse(['error' => "Acción '{$actionName}' no encontrada en {$controllerName}"], 500);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         }
         
         // Ejecutar el controlador
         $controller->$actionName();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         
         // Si es una ruta que NO es API, capturar y mostrar la salida normalmente
         if (!$isApiRoute) {
@@ -343,10 +525,16 @@ foreach ($routes as $route => $config) {
             }
         }
         
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         break;
     }
 }
 
+<<<<<<< HEAD
 // ==================== MANEJO DE RUTAS NO ENCONTRADAS ====================
 if (!$routeFound) {
     if ($isAjax) {
@@ -356,11 +544,32 @@ if (!$routeFound) {
             http_response_code(404);
             echo json_encode(['error' => 'Ruta no encontrada']);
         }
+=======
+<<<<<<< HEAD
+// ==================== MANEJO DE RUTAS NO ENCONTRADAS ====================
+if (!$routeFound) {
+    if ($isAjax) {
+        if (class_exists('ApiResponse')) {
+            ApiResponse::notFound("Ruta: {$path}");
+        } else {
+            http_response_code(404);
+            echo json_encode(['error' => 'Ruta no encontrada']);
+        }
+=======
+if (!$routeFound) {
+    if ($isAjax) {
+        jsonResponse(['error' => 'Ruta no encontrada: ' . $path], 404);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     } else {
         http_response_code(404);
         if (file_exists(VIEW_PATH . DS . 'errors' . DS . '404.php')) {
             renderView('errors/404');
         } else {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             echo "<!DOCTYPE html>
             <html>
             <head>
@@ -378,7 +587,22 @@ if (!$routeFound) {
                 <p><a href='" . APP_URL . "'>Volver al inicio</a></p>
             </body>
             </html>";
+<<<<<<< HEAD
         }
     }
     exit();
 }
+=======
+        }
+    }
+    exit();
+}
+=======
+            echo "<h1>404 - Página no encontrada</h1>";
+            echo "<p>La ruta solicitada no existe: {$path}</p>";
+        }
+    }
+}
+?>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852

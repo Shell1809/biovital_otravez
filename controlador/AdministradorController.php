@@ -20,6 +20,10 @@ class AdministradorController {
     }
     
     // Buscar administrador (cargar datos)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
    public function buscar() {
     $id_administrador = $_POST['dato'] ?? $_POST['id_administrador'] ?? 0;
     $id_sesion = $_SESSION['usuario'];
@@ -29,6 +33,8 @@ class AdministradorController {
     if($id_administrador != $id_sesion) {
         ApiResponse::error('No autorizado para ver este perfil', 'unauthorized', [], 403);
         return;
+<<<<<<< HEAD
+=======
     }
     
     $administrador = new Administrador();
@@ -159,6 +165,187 @@ private function parsearDireccion($direccion_completa) {
     return $resultado;
 }
     
+=======
+    public function buscar() {
+        $id_administrador = $_POST['dato'] ?? $_POST['id_administrador'] ?? 0;
+        $id_sesion = $_SESSION['usuario'];
+        
+        error_log("AdministradorController::buscar - ID: $id_administrador, Sesión: $id_sesion");
+        
+        if($id_administrador != $id_sesion) {
+            jsonResponse(['error' => 'No autorizado']);
+            return;
+        }
+        
+        $administrador = new Administrador();
+        $fecha_actual = new DateTime();
+        $administrador->obtener_datos($id_administrador);
+        
+        if(empty($administrador->objetos)) {
+            jsonResponse(['error' => 'No se encontró el administrador']);
+            return;
+        }
+        
+        $json = array();
+        foreach ($administrador->objetos as $objeto) {
+            $fecha_nacimiento = $objeto->fecha_nacimiento_administrador;
+            $nacimiento = new DateTime($fecha_nacimiento);
+            $edad = $nacimiento->diff($fecha_actual);
+            
+            $avatar_path = (!empty($objeto->avatar_administrador) && $objeto->avatar_administrador != 'avatarDES.jpg') 
+                           ? APP_URL . '/img/' . $objeto->avatar_administrador 
+                           : APP_URL . '/img/avatarDES.jpg';
+            
+            $json = array(
+                'nombre' => $objeto->nombre_administrador ?? '',
+                'apellidos' => $objeto->apellido_administrador ?? '',
+                'fecha_nacimiento' => $edad->y,
+                'cedula' => $objeto->cedula_administrador ?? '',
+                'tipo' => $objeto->nombre_tipo ?? 'Administrador',
+                'telefono' => $objeto->telefono_administrador ?? '',
+                'direccion' => $objeto->direccion_administrador ?? '',
+                'correo' => $objeto->correo_administrador ?? '',
+                'sexo' => $objeto->sexo_administrador ?? '',
+                'adicional' => $objeto->adicional_administrador ?? '',
+                'avatar' => $avatar_path
+            );
+        }
+        jsonResponse($json);
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
+    }
+    
+    $administrador = new Administrador();
+    $fecha_actual = new DateTime();
+    $administrador->obtener_datos($id_administrador);
+    
+    if(empty($administrador->objetos)) {
+        ApiResponse::notFound('Administrador');
+        return;
+    }
+    
+<<<<<<< HEAD
+    $json = array();
+    foreach ($administrador->objetos as $objeto) {
+        $fecha_nacimiento = $objeto->fecha_nacimiento_administrador;
+        $nacimiento = new DateTime($fecha_nacimiento);
+        $edad = $nacimiento->diff($fecha_actual);
+        
+        $avatar_path = (!empty($objeto->avatar_administrador) && $objeto->avatar_administrador != 'avatarDES.jpg') 
+                       ? APP_URL . '/img/' . $objeto->avatar_administrador 
+                       : APP_URL . '/img/avatarDES.jpg';
+        
+        $json = array(
+            'success' => true,
+            'nombre' => $objeto->nombre_administrador ?? '',
+            'apellidos' => $objeto->apellido_administrador ?? '',
+            'fecha_nacimiento' => $edad->y,
+            'cedula' => $objeto->cedula_administrador ?? '',
+            'tipo' => $objeto->nombre_tipo ?? 'Administrador',
+            'telefono' => $objeto->telefono_administrador ?? '',
+            'direccion' => $objeto->direccion_administrador ?? '',
+            'correo' => $objeto->correo_administrador ?? '',
+            'sexo' => $objeto->sexo_administrador ?? '',
+            'adicional' => $objeto->adicional_administrador ?? '',
+            'avatar' => $avatar_path
+        );
+    }
+    
+    ApiResponse::success($json, 'datos_cargados', 'Datos del administrador cargados correctamente');
+}
+    
+   /**
+ * Capturar datos para edición (incluyendo ubicación desglosada)
+ * POST /api/administradores/capturar-datos
+ */
+public function capturarDatos() {
+    $id_administrador = $_POST['id_administrador'] ?? 0;
+    $id_sesion = $_SESSION['usuario'];
+    
+    error_log("AdministradorController::capturarDatos - ID: $id_administrador, Sesión: $id_sesion");
+    
+    if($id_administrador != $id_sesion) {
+        ApiResponse::error('No autorizado', 'unauthorized', [], 403);
+        return;
+    }
+    
+    $administrador = new Administrador();
+    $administrador->obtener_datos($id_administrador);
+    
+    if(empty($administrador->objetos)) {
+        ApiResponse::notFound('Administrador');
+        return;
+    }
+    
+    $json = array();
+    foreach ($administrador->objetos as $objeto) {
+        // Parsear la dirección para obtener sus componentes
+        $direccion_completa = $objeto->direccion_administrador ?? '';
+        $datos_ubicacion = $this->parsearDireccion($direccion_completa);
+        
+        $json = array(
+            'telefono' => $objeto->telefono_administrador ?? '',
+            'direccion' => $direccion_completa,
+            'correo' => $objeto->correo_administrador ?? '',
+            'sexo' => $objeto->sexo_administrador ?? '',
+            'adicional' => $objeto->adicional_administrador ?? '',
+            // Datos de ubicación desglosados
+            'estado' => $datos_ubicacion['estado'],
+            'ciudad' => $datos_ubicacion['ciudad'],
+            'municipio' => $datos_ubicacion['municipio'],
+            'parroquia' => $datos_ubicacion['parroquia'],
+            'direccion_detallada' => $datos_ubicacion['direccion_detallada']
+        );
+    }
+    
+    ApiResponse::success($json, 'datos_capturados', 'Datos cargados para edición');
+}
+
+/**
+ * Parsea una dirección completa para obtener sus componentes
+ * @param string $direccion_completa Dirección en formato "Estado, Ciudad, Municipio, Parroquia - Dirección Detallada"
+ * @return array Componentes de la dirección
+ */
+private function parsearDireccion($direccion_completa) {
+    $resultado = [
+        'estado' => '',
+        'ciudad' => '',
+        'municipio' => '',
+        'parroquia' => '',
+        'direccion_detallada' => ''
+    ];
+    
+    if (empty($direccion_completa)) {
+        return $resultado;
+    }
+    
+    // Separar dirección detallada de la ubicación
+    $partes = explode(' - ', $direccion_completa, 2);
+    $ubicacion = $partes[0];
+    $resultado['direccion_detallada'] = $partes[1] ?? '';
+    
+    // Separar los componentes de la ubicación por comas
+    $componentes = array_map('trim', explode(',', $ubicacion));
+    
+    // Asignar según la cantidad de componentes
+    if (count($componentes) >= 1) {
+        $resultado['estado'] = $componentes[0];
+    }
+    if (count($componentes) >= 2) {
+        $resultado['ciudad'] = $componentes[1];
+    }
+    if (count($componentes) >= 3) {
+        $resultado['municipio'] = $componentes[2];
+    }
+    if (count($componentes) >= 4) {
+        $resultado['parroquia'] = $componentes[3];
+    }
+    
+    return $resultado;
+}
+    
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     // Editar administrador
     public function editarUsuario() {
         $id_administrador = $_POST['id_administrador'] ?? 0;

@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 <?php
 // vista/registro_asistente.php
 ?>
+=======
+<<<<<<< HEAD
+<?php
+// vista/registro_asistente.php
+?>
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +19,15 @@
     
     <!-- ==================== VARIABLE GLOBAL APP_URL ==================== -->
     <script>
+<<<<<<< HEAD
         var APP_URL = '<?php echo APP_URL; ?>';
+=======
+<<<<<<< HEAD
+        var APP_URL = '<?php echo APP_URL; ?>';
+=======
+        var APP_URL = '<?php echo rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'); ?>';
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         console.log('APP_URL definida:', APP_URL);
     </script>
     
@@ -258,9 +275,22 @@
                     </button>
                 </div>
                   <!-- ==================== redirecciona a login ==================== -->
+<<<<<<< HEAD
               <div class="login-link">
     <a href="http://localhost/biovital/"><i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí</a>
 </div>
+=======
+<<<<<<< HEAD
+              <div class="login-link">
+    <a href="http://localhost/biovital/"><i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí</a>
+</div>
+=======
+                <div class="login-link">
+                 <a href="<?php echo APP_URL; ?>/login/asistente" class="login-link">
+                  <i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí</a>
+               </div>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
   <!-- ==================== FIN ==================== -->
              
             </div>

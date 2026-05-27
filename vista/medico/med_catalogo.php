@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // vista/medico/med_catalogo.php
 // Contenido principal para el dashboard del médico
 // Este archivo se renderiza dentro del layout base dashboard.php
@@ -6,6 +7,19 @@
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Usuario';
 $id_medico = $id_medico ?? $_SESSION['usuario'] ?? 0;
+=======
+<<<<<<< HEAD
+// Validación simplificada
+AuthHelper::checkRoleAndType('medico', 2, true);
+
+=======
+if($_SESSION['us_tipo'] != 2 || $_SESSION['rol'] != 'medico'){
+    header('Location: ' . APP_URL . '/login/medico');
+    exit();
+}
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+$nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 ?>
 
 <!-- CSS Adicional para esta vista -->
@@ -232,12 +246,33 @@ $id_medico = $id_medico ?? $_SESSION['usuario'] ?? 0;
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1><i class="fas fa-user-md"></i> Panel del Médico</h1>
+=======
+    <!-- Main Sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="<?php echo APP_URL; ?>/panel/medico" class="brand-link">
+            <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity:.8">
+<<<<<<< HEAD
+            <span class="brand-text font-weight-light">BioVital</span>
+=======
+            <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+        </a>
+        <div class="sidebar">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img id="avatar4" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block"><?php echo $nombre_usuario; ?></a>
+                </div>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             </div>
         </div>
     </div>

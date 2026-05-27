@@ -1,7 +1,18 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_recetas.php
 // Contenido principal para la gestión de recetas médicas (Administrador)
 // Este archivo se renderiza dentro del layout base dashboard.php
+=======
+<<<<<<< HEAD
+=======
+// NO iniciar sesión aquí - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Administrador';
@@ -120,6 +131,7 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -128,6 +140,169 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
                 <h1><i class="fas fa-prescription-bottle-alt"></i> Recetas Médicas</h1>
             </div>
         </div>
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Administrador | Recetas Médicas</title>
+    
+    <style>
+        .table-actions {
+            white-space: nowrap;
+            width: 80px;
+        }
+        .badge-receta {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+        .modal-lg-custom {
+            max-width: 800px;
+        }
+        .receta-card {
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+        }
+        .receta-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .search-box {
+            max-width: 300px;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .btn-ver-detalle {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-ver-detalle:hover {
+            color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<<<<<<< HEAD
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BioVital</span>
+=======
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+                </li>
+<<<<<<< HEAD
+
+               
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                 <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+=======
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link active">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 
@@ -324,26 +499,45 @@ $(document).ready(function() {
             url: APP_URL + '/api/recetas/estadisticas',
             type: 'POST',
             dataType: 'json',
+<<<<<<< HEAD
             timeout: 10000,
             success: function(response) {
                 console.log('Estadísticas recibidas:', response);
                 
+=======
+<<<<<<< HEAD
+            success: function(response) {
+                console.log('Estadísticas recibidas:', response);
+                
+                // Manejar formato ApiResponse
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 var data = response;
                 if (response.success && response.data) {
                     data = response.data;
                 }
                 
+<<<<<<< HEAD
+=======
+=======
+            success: function(data) {
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 $('#total_recetas').text(data.total_recetas || 0);
                 $('#total_medicos').text(data.total_medicos || 0);
                 $('#total_pacientes').text(data.total_pacientes || 0);
                 $('#recetas_mes').text(data.recetas_mes || 0);
             },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             error: function(xhr, status, error) {
                 console.error('Error al cargar estadísticas:', error);
                 $('#total_recetas').text('0');
                 $('#total_medicos').text('0');
                 $('#total_pacientes').text('0');
                 $('#recetas_mes').text('0');
+<<<<<<< HEAD
             }
         });
     }
@@ -357,11 +551,28 @@ $(document).ready(function() {
                 <p class="mt-2">Cargando recetas...</p>
             </td></tr>
         `);
+=======
+=======
+            error: function() {
+                console.log('Error al cargar estadísticas');
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            }
+        });
+    }
+
+    function listar_recetas() {
+<<<<<<< HEAD
+        $('#tabla_recetas').html('<tr><td colspan="9" class="text-center"><div class="spinner-border text-primary"></div><p>Cargando recetas...</p></td></tr>');
+=======
+        $('#tabla_recetas').html('<td><td colspan="9" class="text-center"><div class="spinner-border text-primary"></div><p>Cargando recetas...</p></td></tr>');
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
         
         $.ajax({
             url: APP_URL + '/api/recetas/listar',
             type: 'POST',
             dataType: 'json',
+<<<<<<< HEAD
             timeout: 15000,
             success: function(response) {
                 console.log('Respuesta recetas:', response);
@@ -373,6 +584,69 @@ $(document).ready(function() {
                     recetas = response;
                 } else if (response.recetas && Array.isArray(response.recetas)) {
                     recetas = response.recetas;
+=======
+<<<<<<< HEAD
+            success: function(response) {
+                console.log('Respuesta recetas:', response);
+                
+                // Manejar formato ApiResponse
+                var recetas = [];
+                if (response.success && response.data) {
+                    recetas = response.data;
+                } else if (Array.isArray(response)) {
+                    recetas = response;
+                } else if (response.recetas) {
+                    recetas = response.recetas;
+                } else {
+                    recetas = response;
+                }
+                
+                // Asegurar que sea un array
+                if (!Array.isArray(recetas)) {
+                    recetas = [];
+                }
+                
+                console.log('Recetas procesadas:', recetas.length);
+                
+                let html = '';
+                
+                if (recetas.length === 0) {
+                    html = '<tr><td colspan="9" class="text-center text-muted">No hay recetas registradas</td></tr>';
+                } else {
+                    for (let i = 0; i < recetas.length; i++) {
+                        let receta = recetas[i];
+=======
+            success: function(recetas) {
+                let html = '';
+                
+                if (!recetas || recetas.length === 0) {
+                    html = '<tr><td colspan="9" class="text-center text-muted">No hay recetas registradas</td></tr>';
+                } else {
+                    for (let receta of recetas) {
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                        html += `
+                            <tr>
+                                <td><span class="badge badge-secondary">${receta.id_receta || ''}</span></td>
+                                <td><strong>${escapeHtml(receta.nombre_medicamento || '')}</strong></td>
+                                <td>${escapeHtml(receta.marca || '')}</td>
+                                <td>${escapeHtml(receta.cantidad || '')}</td>
+                                <td>${escapeHtml(receta.dosis || '-')}</td>
+                                <td><i class="fas fa-user-injured text-info"></i> ${escapeHtml(receta.paciente || 'N/A')}</td>
+                                <td><i class="fas fa-user-md text-success"></i> ${escapeHtml(receta.medico || 'N/A')}</td>
+                                <td><i class="fas fa-calendar-alt"></i> ${receta.fecha_receta || ''}</td>
+                                <td class="table-actions">
+                                    <button class="btn btn-info btn-sm btn-ver-detalle" data-id="${receta.id_receta}">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </button>
+<<<<<<< HEAD
+                                 </td>
+=======
+                                </td>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                            </tr>
+                        `;
+                    }
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 }
                 
                 if (!Array.isArray(recetas)) {
@@ -557,16 +831,25 @@ $(document).ready(function() {
             type: 'POST',
             data: { id_receta: id },
             dataType: 'json',
+<<<<<<< HEAD
             timeout: 10000,
             success: function(response) {
                 console.log('Detalle receta:', response);
                 
+=======
+<<<<<<< HEAD
+            success: function(response) {
+                console.log('Detalle receta:', response);
+                
+                // Manejar formato ApiResponse
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 var receta = response;
                 if (response.success && response.data) {
                     receta = response.data;
                 }
                 
                 if (receta && receta.id_receta) {
+<<<<<<< HEAD
                     let tipo = '';
                     if (receta.nombre_medicamento && receta.nombre_medicamento.includes('ESTUDIOS')) {
                         tipo = '<span class="badge badge-info"><i class="fas fa-flask"></i> Estudio de Laboratorio</span>';
@@ -576,14 +859,66 @@ $(document).ready(function() {
                         tipo = '<span class="badge badge-success"><i class="fas fa-capsules"></i> Medicamento</span>';
                     }
                     
+=======
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                     let html = `
                         <div class="receta-detalle">
                             <div class="row mb-3">
                                 <div class="col-md-12 text-center">
                                     <h3 class="text-primary">RECETA MÉDICA</h3>
+<<<<<<< HEAD
                                     <p>${tipo}</p>
                                     <hr>
                                 </div>
+=======
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong><i class="fas fa-id-badge"></i> ID Receta:</strong> ${receta.id_receta}</p>
+                                    <p><strong><i class="fas fa-capsules"></i> Medicamento:</strong> ${escapeHtml(receta.nombre_medicamento)}</p>
+                                    <p><strong><i class="fas fa-trademark"></i> Marca:</strong> ${escapeHtml(receta.marca)}</p>
+                                    <p><strong><i class="fas fa-cubes"></i> Cantidad:</strong> ${escapeHtml(receta.cantidad)}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong><i class="fas fa-clock"></i> Dosis:</strong> ${escapeHtml(receta.dosis || 'No especificada')}</p>
+                                    <p><strong><i class="fas fa-calendar-day"></i> Fecha:</strong> ${receta.fecha_receta}</p>
+                                    <p><strong><i class="fas fa-user-injured"></i> Paciente ID:</strong> ${receta.id_paciente || 'N/A'}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-info text-white">
+                                            <strong><i class="fas fa-stethoscope"></i> Instrucciones</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            ${escapeHtml(receta.instrucciones) || '<em class="text-muted">Sin instrucciones adicionales</em>'}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 text-muted text-center">
+                                    <small>Documento generado electrónicamente por BioVital - Sistema de Gestión Médica</small>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $('#detalle_receta_content').html(html);
+                } else {
+                    $('#detalle_receta_content').html('<div class="alert alert-danger">Error al cargar los detalles de la receta</div>');
+                }
+=======
+            success: function(receta) {
+                let html = `
+                    <div class="receta-detalle">
+                        <div class="row mb-3">
+                            <div class="col-md-12 text-center">
+                                <h3 class="text-primary">RECETA MÉDICA</h3>
+                                <hr>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -619,11 +954,18 @@ $(document).ready(function() {
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                     `;
                     $('#detalle_receta_content').html(html);
                 } else {
                     $('#detalle_receta_content').html('<div class="alert alert-danger">Error al cargar los detalles de la receta</div>');
                 }
+=======
+                    </div>
+                `;
+                $('#detalle_receta_content').html(html);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             },
             error: function(xhr, status, error) {
                 console.error('Error al obtener detalle:', error);
@@ -772,4 +1114,14 @@ $(document).ready(function() {
     cargarEstadisticas();
     cargarRecetas();
 });
+<<<<<<< HEAD
 </script>
+=======
+</script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+</body>
+</html>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852

@@ -207,12 +207,211 @@ $avatar_actual = $avatar_actual ?? (!empty($_SESSION['avatar']) ? $_SESSION['ava
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1><i class="fas fa-user-md"></i> Mi Perfil Profesional</h1>
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Médico | Mi Perfil</title>
+    
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        .info-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+        .info-card .card-header {
+            background: white;
+            border-bottom: 2px solid #0d9488;
+            padding: 1rem 1.5rem;
+        }
+        .info-card .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--bv-dark);
+        }
+        .info-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: var(--bv-text-light);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-value {
+            font-weight: 500;
+            color: var(--bv-dark);
+            margin-top: 0.25rem;
+        }
+        .btn-editar {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            border: none;
+            border-radius: 10px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-editar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13,148,136,0.3);
+        }
+        .form-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .form-card .card-header {
+            background: white;
+            border-bottom: 2px solid #0d9488;
+            padding: 1rem 1.5rem;
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1.5px solid #e2e8f0;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #0d9488;
+            box-shadow: 0 0 0 3px rgba(13,148,136,0.1);
+        }
+        .btn-guardar {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            border-radius: 10px;
+            padding: 0.7rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem;
+        }
+        .required-field::after {
+            content: " *";
+            color: #dc3545;
+        }
+        .csrf-info {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .badge-role {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/medico" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+<<<<<<< HEAD
+        <span class="brand-text font-weight-light">BioVital</span>
+=======
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             </div>
         </div>
     </div>

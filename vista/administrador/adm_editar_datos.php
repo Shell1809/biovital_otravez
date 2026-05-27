@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_editar_datos.php
 // Contenido principal para la edición de perfil del administrador
 // Este archivo se renderiza dentro del layout base dashboard.php
@@ -7,8 +8,33 @@
 $nombre_usuario = $nombre_usuario ?? 'Usuario';
 $id_administrador = $id_administrador ?? $_SESSION['usuario'] ?? 0;
 $avatar_actual = $avatar_actual ?? (!empty($_SESSION['avatar']) ? $_SESSION['avatar'] : APP_URL . '/img/avatarDES.jpg');
+=======
+<<<<<<< HEAD
+
+=======
+// NO session_start() - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+
+$id_administrador = $_SESSION['usuario'];
+$nombre_usuario = $_SESSION['nombre_us'];
+<<<<<<< HEAD
+
+// Incluir Security para CSRF
+$securityPath = dirname(__DIR__, 2) . '/modelo/Security.php';
+if (!file_exists($securityPath)) {
+    die("Error: No se encuentra Security.php");
+}
+include_once $securityPath;
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 ?>
 
+<<<<<<< HEAD
 <!-- CSS Adicional para esta vista -->
 <style>
     .profile-header {
@@ -171,6 +197,271 @@ $avatar_actual = $avatar_actual ?? (!empty($_SESSION['avatar']) ? $_SESSION['ava
                 <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
             </div>
         </div>
+=======
+    <script>
+        var APP_URL = '<?php echo APP_URL; ?>';
+<<<<<<< HEAD
+        var ID_ADMINISTRADOR = <?php echo json_encode($id_administrador); ?>;
+        console.log('APP_URL:', APP_URL);
+        console.log('ID_ADMINISTRADOR:', ID_ADMINISTRADOR);
+=======
+        console.log('APP_URL:', APP_URL);
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Administrador | Mi Perfil</title>
+    
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, var(--bv-primary), var(--bv-accent));
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        .info-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+        .info-card .card-header {
+            background: white;
+            border-bottom: 2px solid var(--bv-primary);
+            padding: 1rem 1.5rem;
+        }
+        .info-card .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--bv-dark);
+        }
+        .info-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: var(--bv-text-light);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-value {
+            font-weight: 500;
+            color: var(--bv-dark);
+            margin-top: 0.25rem;
+        }
+        .btn-editar {
+            background: linear-gradient(135deg, var(--bv-primary), var(--bv-accent));
+            border: none;
+            border-radius: 10px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-editar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,119,182,0.3);
+        }
+        .form-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .form-card .card-header {
+            background: white;
+            border-bottom: 2px solid var(--bv-primary);
+            padding: 1rem 1.5rem;
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1.5px solid #e2e8f0;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--bv-primary);
+            box-shadow: 0 0 0 3px rgba(0,119,182,0.1);
+        }
+        .btn-guardar {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            border-radius: 10px;
+            padding: 0.7rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem;
+        }
+        .required-field::after {
+            content: " *";
+            color: #dc3545;
+        }
+        .ubicacion-select {
+            margin-bottom: 1rem;
+        }
+        .csrf-info {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+<<<<<<< HEAD
+        <span class="brand-text font-weight-light">BioVital</span>
+=======
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link active">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                <li class="nav-item">
+<<<<<<< HEAD
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+<<<<<<< HEAD
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            </ul>
+        </nav>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 
@@ -444,6 +735,7 @@ $avatar_actual = $avatar_actual ?? (!empty($_SESSION['avatar']) ? $_SESSION['ava
     </div>
 </div>
 
+<<<<<<< HEAD
 <script src="<?php echo APP_URL; ?>/js/ubicacion.js"></script>
 
 <script>
@@ -1214,3 +1506,1190 @@ $(document).ready(function() {
     cargarDatosAdministrador();
 });
 </script>
+=======
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="<?php echo APP_URL; ?>/panel/administrador">Home</a></li>
+                        <li class="breadcrumb-item active">Mi Perfil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <input type="hidden" id="id_usuario" value="<?php echo htmlspecialchars($id_administrador); ?>">
+            
+            <div class="row">
+                <!-- COLUMNA IZQUIERDA - PERFIL VISUAL -->
+                <div class="col-md-4">
+                    <!-- Profile Header -->
+                    <div class="profile-header text-white">
+                        <div class="text-center">
+                            <img id="avatar2" src="<?php echo APP_URL; ?>/img/avatarDES.jpg" class="profile-avatar mb-3">
+                            <h3 id="nombre_us" class="mb-0">Cargando...</h3>
+                            <p id="apellidos_us" class="opacity-75">Cargando...</p>
+                            <button type="button" data-toggle="modal" data-target="#cambiophoto" class="btn btn-light btn-sm mt-2">
+                                <i class="fas fa-camera"></i> Cambiar avatar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Información Personal Card -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-id-card"></i> Información Personal</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-birthday-cake"></i> Edad</div>
+                                <div class="info-value" id="edad">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-id-card"></i> Cédula</div>
+                                <div class="info-value" id="cedula_us">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-user-tag"></i> Tipo de Usuario</div>
+                                <div class="info-value">
+                                    <span class="badge bg-primary" style="background: linear-gradient(135deg, var(--bv-primary), var(--bv-accent));">
+                                        Administrador
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-venus-mars"></i> Sexo</div>
+                                <div class="info-value" id="sexo_us">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contacto Card -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-address-card"></i> Contacto</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-phone"></i> Teléfono</div>
+                                <div class="info-value" id="telefono_us">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-envelope"></i> Correo Electrónico</div>
+                                <div class="info-value" id="correo_us">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Dirección</div>
+                                <div class="info-value" id="direccion_us">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-pencil-alt"></i> Información adicional</div>
+                                <div class="info-value" id="adicional_us">-</div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent text-center">
+                            <button class="edit btn btn-editar btn-sm w-100">
+                                <i class="fas fa-edit"></i> Editar información
+                            </button>
+                            <button data-toggle="modal" data-target="#cambiocontra" type="button" class="btn btn-outline-warning btn-sm w-100 mt-2">
+                                <i class="fas fa-key"></i> Cambiar contraseña
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA - FORMULARIO DE EDICIÓN -->
+                <div class="col-md-8">
+                    <div class="form-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-edit"></i> Editar Datos Personales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-success alert-custom" id="editado" style="display:none;">
+                                <i class="fas fa-check-circle"></i> Datos actualizados correctamente
+                            </div>
+                            <div class="alert alert-danger alert-custom" id="noeditado" style="display:none;">
+                                <i class="fas fa-exclamation-circle"></i> Primero haga clic en "Editar información"
+                            </div>
+                            
+                            <form id="form-usuario" class="form-horizontal">
+                                <?php echo Security::campoCSRF(); ?>
+                                
+                                <div class="form-group">
+                                    <label for="telefono" class="required-field">Teléfono</label>
+                                    <input type="tel" id="telefono" class="form-control" placeholder="Ej: 04141234567" disabled>
+                                </div>
+                                
+                                <!-- Sistema de Ubicación -->
+                                <h5 class="mt-4 mb-3"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h5>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="estado">Estado</label>
+                                            <select class="form-control" id="estado" disabled>
+                                                <option value="">Seleccione un estado...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ciudad">Ciudad</label>
+                                            <select class="form-control" id="ciudad" disabled>
+                                                <option value="">Seleccione un estado primero...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="municipio">Municipio</label>
+                                            <select class="form-control" id="municipio" disabled>
+                                                <option value="">Seleccione un estado primero...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="parroquia">Parroquia</label>
+                                            <select class="form-control" id="parroquia" disabled>
+                                                <option value="">Seleccione un municipio primero...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="direccion_detallada">Dirección Detallada</label>
+                                    <input type="text" class="form-control" id="direccion_detallada" placeholder="Av. Principal, Edificio, Número, etc." disabled>
+                                    <small class="form-text text-muted">Ej: Av. Principal, Edificio Central, Casa #123</small>
+                                </div>
+
+                                <input type="hidden" id="direccion" name="direccion">
+                                
+                                <div class="form-group">
+                                    <label for="correo" class="required-field">Correo Electrónico</label>
+                                    <input type="email" id="correo" class="form-control" placeholder="ejemplo@correo.com" disabled>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="sexo">Sexo</label>
+                                    <select id="sexo" class="form-control" disabled>
+                                        <option value="">Seleccione...</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="adicional">Información adicional</label>
+                                    <textarea class="form-control" id="adicional" rows="4" placeholder="Información adicional sobre el administrador..." disabled></textarea>
+                                </div>
+                                
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-guardar" disabled>
+                                        <i class="fas fa-save"></i> Guardar Cambios
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="csrf-info">
+                                <i class="fas fa-shield-alt"></i> Todos los cambios están protegidos contra falsificación de solicitudes (CSRF)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>Version</b> 1.0.0
+    </div>
+    <strong>Copyright &copy; 2024 BioVital.</strong> Todos los derechos reservados.
+</footer>
+
+</div>
+
+<script src="<?php echo APP_URL; ?>/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
+
+<script>
+// Script de carga de datos del administrador 
+$(document).ready(function() {
+    var id_usuario = $('#id_usuario').val();
+    var edit = false;
+    
+    console.log('=== INICIANDO CARGA DE PERFIL ===');
+    console.log('ID Usuario:', id_usuario);
+    console.log('APP_URL:', APP_URL);
+    
+    if (!id_usuario || id_usuario === '') {
+        console.error('ERROR: ID de administrador no encontrado');
+        $('#nombre_us').html('Error: Sesión no válida');
+        return;
+    }
+    
+    // Función para cargar datos del administrador
+    function cargarDatosAdministrador() {
+        console.log('Cargando datos del administrador...');
+        
+        $.ajax({
+            url: APP_URL + '/api/administradores/buscar',
+            type: 'POST',
+            data: { id_administrador: id_usuario, dato: id_usuario },
+            dataType: 'json',
+            timeout: 10000,
+            success: function(response) {
+                console.log('Respuesta del servidor:', response);
+                
+                // Verificar si la respuesta tiene el formato ApiResponse
+                var datos = response;
+                if (response.data && response.success) {
+                    datos = response.data;
+                }
+                
+                if (datos.error) {
+                    console.error('Error:', datos.error);
+                    $('#nombre_us').html('Error: ' + datos.error);
+                    return;
+                }
+                
+                // Actualizar UI con los datos
+                $('#nombre_us').html(datos.nombre || '');
+                $('#apellidos_us').html(datos.apellidos || '');
+                $('#edad').html(datos.fecha_nacimiento || '');
+                $('#cedula_us').html(datos.cedula || '');
+                $('#telefono_us').html(datos.telefono || '');
+                $('#correo_us').html(datos.correo || '');
+                $('#sexo_us').html(datos.sexo || '');
+                $('#adicional_us').html(datos.adicional || '');
+                
+                // Mostrar dirección
+                if (datos.direccion) {
+                    $('#direccion_us').html(datos.direccion);
+                } else {
+                    $('#direccion_us').html('-');
+                }
+                
+                // Actualizar avatar
+                if (datos.avatar) {
+                    var avatarUrl = datos.avatar;
+                    var timestamp = new Date().getTime();
+                    avatarUrl = avatarUrl + '?t=' + timestamp;
+                    
+                    $('#avatar1, #avatar2, #avatar3, #avatar4, #avatar_nav').attr('src', avatarUrl);
+                    console.log('Avatar actualizado:', avatarUrl);
+                } else {
+                    var defaultAvatar = APP_URL + '/img/avatarDES.jpg?t=' + new Date().getTime();
+                    $('#avatar1, #avatar2, #avatar3, #avatar4, #avatar_nav').attr('src', defaultAvatar);
+                }
+                
+                console.log('Datos cargados correctamente');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la petición AJAX:', error);
+                console.error('Respuesta del servidor:', xhr.responseText);
+                $('#nombre_us').html('Error de conexión: ' + status);
+            }
+        });
+    }
+    
+    // Cargar datos al iniciar
+    cargarDatosAdministrador();
+    
+   // Botón editar - VERSIÓN CORREGIDA CON CARGA DE UBICACIÓN
+$(document).on('click', '.edit', function(e) {
+    e.preventDefault();
+    edit = true;
+    
+    console.log('Editando administrador ID:', id_usuario);
+    
+    var $btn = $(this);
+    var originalText = $btn.html();
+    $btn.html('<i class="fas fa-spinner fa-spin"></i> Cargando...');
+    
+    $.ajax({
+        url: APP_URL + '/api/administradores/capturar-datos',
+        type: 'POST',
+        data: { id_administrador: id_usuario },
+        dataType: 'json',
+        success: function(response) {
+            var datos = response;
+            if (response.data && response.success) {
+                datos = response.data;
+            }
+            
+            console.log('Datos a editar:', datos);
+            
+            if (datos.error) {
+                alert('Error: ' + datos.error);
+                return;
+            }
+            
+            // Cargar datos básicos en los campos
+            $('#telefono').val(datos.telefono || '');
+            $('#correo').val(datos.correo || '');
+            $('#sexo').val(datos.sexo || '');
+            $('#adicional').val(datos.adicional || '');
+            $('#direccion_detallada').val(datos.direccion_detallada || '');
+            
+            // Habilitar campos de edición
+            $('#telefono, #correo, #sexo, #adicional, #estado, #ciudad, #municipio, #parroquia, #direccion_detallada').prop('disabled', false);
+            
+            // ==================== CARGAR UBICACIÓN EN LOS SELECTS ====================
+            if (datos.estado && datos.estado !== '') {
+                // Primero cargar la lista de estados
+                cargarEstadosConSeleccion(datos.estado, datos.ciudad, datos.municipio, datos.parroquia);
+            } else {
+                // Si no hay ubicación guardada, solo cargar estados
+                cargarEstados();
+            }
+            
+            // Cambiar estilo del botón guardar
+            $('.btn-outline-success')
+                .removeClass('btn-outline-success')
+                .addClass('btn-success')
+                .prop('disabled', false);
+            
+            $('#editado').show(1000);
+            setTimeout(function() { $('#editado').hide(2000); }, 2000);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al capturar datos:', error);
+            alert('Error al cargar datos para edición: ' + status);
+        },
+        complete: function() {
+            $btn.html(originalText);
+        }
+    });
+});
+
+// ==================== FUNCIONES DE UBICACIÓN ====================
+
+
+function cargarEstadosConSeleccion(estadoSeleccionado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada) {
+    console.log('Cargando estados con selección:', {estadoSeleccionado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada});
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/estados',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta estados API:', response);
+            
+            // Manejar el formato de respuesta de ApiResponse
+            var estados = [];
+            if (response.success && response.data) {
+                estados = response.data;
+            } else if (Array.isArray(response)) {
+                estados = response;
+            } else if (response.estados) {
+                estados = response.estados;
+            } else {
+                estados = response;
+            }
+            
+            console.log('Estados procesados:', estados);
+            
+            if (!Array.isArray(estados) || estados.length === 0) {
+                console.error('No se recibieron estados válidos');
+                cargarEstadosFallbackConSeleccion(estadoSeleccionado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada);
+                return;
+            }
+            
+            let options = '<option value="">Seleccione un estado...</option>';
+            let estadoId = null;
+            
+            for (let i = 0; i < estados.length; i++) {
+                let estado = estados[i];
+                let id = estado.id_estado || estado.id;
+                let nombre = estado.estado || estado.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+                if (nombre === estadoSeleccionado) {
+                    estadoId = id;
+                }
+            }
+            $('#estado').html(options).prop('disabled', false);
+            
+            if (estadoId) {
+                $('#estado').val(estadoId);
+                // Cargar ciudades, municipios y parroquias
+                cargarCiudadesConSeleccion(estadoId, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada);
+                cargarMunicipiosConSeleccion(estadoId, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar estados:', error);
+            cargarEstadosFallbackConSeleccion(estadoSeleccionado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada);
+        }
+    });
+}
+
+function cargarCiudadesConSeleccion(id_estado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada) {
+    if (!id_estado) return;
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/ciudades',
+        type: 'POST',
+        data: { id_estado: id_estado },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta ciudades API:', response);
+            
+            // Manejar el formato de respuesta de ApiResponse
+            var ciudades = [];
+            if (response.success && response.data) {
+                ciudades = response.data;
+            } else if (Array.isArray(response)) {
+                ciudades = response;
+            } else if (response.ciudades) {
+                ciudades = response.ciudades;
+            } else {
+                ciudades = response;
+            }
+            
+            if (!Array.isArray(ciudades) || ciudades.length === 0) {
+                $('#ciudad').html('<option value="">No hay ciudades disponibles</option>').prop('disabled', false);
+                return;
+            }
+            
+            let options = '<option value="">Seleccione una ciudad...</option>';
+            let ciudadId = null;
+            
+            for (let i = 0; i < ciudades.length; i++) {
+                let ciudad = ciudades[i];
+                let id = ciudad.id_ciudad || ciudad.id;
+                let nombre = ciudad.ciudad || ciudad.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+                if (nombre === ciudadSeleccionada) {
+                    ciudadId = id;
+                }
+            }
+            $('#ciudad').html(options).prop('disabled', false);
+            
+            if (ciudadId) {
+                $('#ciudad').val(ciudadId);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar ciudades:', error);
+            $('#ciudad').html('<option value="">Error al cargar ciudades</option>').prop('disabled', false);
+        }
+    });
+}
+
+function cargarMunicipiosConSeleccion(id_estado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada) {
+    if (!id_estado) return;
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/municipios',
+        type: 'POST',
+        data: { id_estado: id_estado },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta municipios API:', response);
+            
+            // Manejar el formato de respuesta de ApiResponse
+            var municipios = [];
+            if (response.success && response.data) {
+                municipios = response.data;
+            } else if (Array.isArray(response)) {
+                municipios = response;
+            } else if (response.municipios) {
+                municipios = response.municipios;
+            } else {
+                municipios = response;
+            }
+            
+            if (!Array.isArray(municipios) || municipios.length === 0) {
+                $('#municipio').html('<option value="">No hay municipios disponibles</option>').prop('disabled', false);
+                $('#parroquia').html('<option value="">Seleccione un municipio primero...</option>').prop('disabled', true);
+                return;
+            }
+            
+            let options = '<option value="">Seleccione un municipio...</option>';
+            let municipioId = null;
+            
+            for (let i = 0; i < municipios.length; i++) {
+                let municipio = municipios[i];
+                let id = municipio.id_municipio || municipio.id;
+                let nombre = municipio.municipio || municipio.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+                if (nombre === municipioSeleccionado) {
+                    municipioId = id;
+                }
+            }
+            $('#municipio').html(options).prop('disabled', false);
+            
+            if (municipioId) {
+                $('#municipio').val(municipioId);
+                // Cargar parroquias del municipio seleccionado
+                cargarParroquiasConSeleccion(municipioId, parroquiaSeleccionada);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar municipios:', error);
+            $('#municipio').html('<option value="">Error al cargar municipios</option>').prop('disabled', false);
+        }
+    });
+}
+
+function cargarParroquiasConSeleccion(id_municipio, parroquiaSeleccionada) {
+    if (!id_municipio) return;
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/parroquias',
+        type: 'POST',
+        data: { id_municipio: id_municipio },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta parroquias API:', response);
+            
+            // Manejar el formato de respuesta de ApiResponse
+            var parroquias = [];
+            if (response.success && response.data) {
+                parroquias = response.data;
+            } else if (Array.isArray(response)) {
+                parroquias = response;
+            } else if (response.parroquias) {
+                parroquias = response.parroquias;
+            } else {
+                parroquias = response;
+            }
+            
+            if (!Array.isArray(parroquias) || parroquias.length === 0) {
+                $('#parroquia').html('<option value="">No hay parroquias disponibles</option>').prop('disabled', false);
+                return;
+            }
+            
+            let options = '<option value="">Seleccione una parroquia...</option>';
+            let parroquiaId = null;
+            
+            for (let i = 0; i < parroquias.length; i++) {
+                let parroquia = parroquias[i];
+                let id = parroquia.id_parroquia || parroquia.id;
+                let nombre = parroquia.parroquia || parroquia.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+                if (nombre === parroquiaSeleccionada) {
+                    parroquiaId = id;
+                }
+            }
+            $('#parroquia').html(options).prop('disabled', false);
+            
+            if (parroquiaId) {
+                $('#parroquia').val(parroquiaId);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar parroquias:', error);
+            $('#parroquia').html('<option value="">Error al cargar parroquias</option>').prop('disabled', false);
+        }
+    });
+}
+
+function cargarEstadosFallbackConSeleccion(estadoSeleccionado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada) {
+    console.log('Usando fallback de estados');
+    const estados = [
+        {id_estado: 1, estado: 'Amazonas'}, {id_estado: 2, estado: 'Anzoátegui'},
+        {id_estado: 3, estado: 'Apure'}, {id_estado: 4, estado: 'Aragua'},
+        {id_estado: 5, estado: 'Barinas'}, {id_estado: 6, estado: 'Bolívar'},
+        {id_estado: 7, estado: 'Carabobo'}, {id_estado: 8, estado: 'Cojedes'},
+        {id_estado: 9, estado: 'Delta Amacuro'}, {id_estado: 10, estado: 'Falcón'},
+        {id_estado: 11, estado: 'Guárico'}, {id_estado: 12, estado: 'Lara'},
+        {id_estado: 13, estado: 'Mérida'}, {id_estado: 14, estado: 'Miranda'},
+        {id_estado: 15, estado: 'Monagas'}, {id_estado: 16, estado: 'Nueva Esparta'},
+        {id_estado: 17, estado: 'Portuguesa'}, {id_estado: 18, estado: 'Sucre'},
+        {id_estado: 19, estado: 'Táchira'}, {id_estado: 20, estado: 'Trujillo'},
+        {id_estado: 21, estado: 'La Guaira'}, {id_estado: 22, estado: 'Yaracuy'},
+        {id_estado: 23, estado: 'Zulia'}, {id_estado: 24, estado: 'Distrito Capital'}
+    ];
+    
+    let options = '<option value="">Seleccione un estado...</option>';
+    let estadoId = null;
+    
+    for (let i = 0; i < estados.length; i++) {
+        options += `<option value="${estados[i].id_estado}">${estados[i].estado}</option>`;
+        if (estados[i].estado === estadoSeleccionado) {
+            estadoId = estados[i].id_estado;
+        }
+    }
+    $('#estado').html(options).prop('disabled', false);
+    
+    if (estadoId) {
+        $('#estado').val(estadoId);
+        // En fallback, también cargar ciudades, municipios y parroquias si es necesario
+        if (ciudadSeleccionada) {
+            setTimeout(function() {
+                cargarCiudadesFallback(estadoId, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada);
+            }, 100);
+        }
+    }
+}
+
+function cargarCiudadesFallback(id_estado, ciudadSeleccionada, municipioSeleccionado, parroquiaSeleccionada) {
+    // Fallback con datos locales para ciudades
+    const ciudadesPorEstado = {
+        5: [{id_ciudad: 75, ciudad: 'Barinas'}, {id_ciudad: 76, ciudad: 'Barinitas'}, {id_ciudad: 77, ciudad: 'Barrancas'}],
+        14: [{id_ciudad: 279, ciudad: 'Los Teques'}, {id_ciudad: 275, ciudad: 'Guarenas'}, {id_ciudad: 276, ciudad: 'Guatire'}]
+    };
+    
+    let ciudades = ciudadesPorEstado[id_estado] || [];
+    let options = '<option value="">Seleccione una ciudad...</option>';
+    let ciudadId = null;
+    
+    for (let i = 0; i < ciudades.length; i++) {
+        options += `<option value="${ciudades[i].id_ciudad}">${ciudades[i].ciudad}</option>`;
+        if (ciudades[i].ciudad === ciudadSeleccionada) {
+            ciudadId = ciudades[i].id_ciudad;
+        }
+    }
+    $('#ciudad').html(options).prop('disabled', false);
+    
+    if (ciudadId) {
+        $('#ciudad').val(ciudadId);
+    }
+}
+
+// Función para cargar estados sin selección (para nuevos registros)
+function cargarEstados() {
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/estados',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            var estados = [];
+            if (response.success && response.data) {
+                estados = response.data;
+            } else if (Array.isArray(response)) {
+                estados = response;
+            } else {
+                estados = response;
+            }
+            
+            if (!Array.isArray(estados)) {
+                estados = [];
+            }
+            
+            let options = '<option value="">Seleccione un estado...</option>';
+            for (let i = 0; i < estados.length; i++) {
+                let estado = estados[i];
+                let id = estado.id_estado || estado.id;
+                let nombre = estado.estado || estado.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+            }
+            $('#estado').html(options).prop('disabled', false);
+        },
+        error: function() {
+            cargarEstadosFallback();
+        }
+    });
+}
+
+function cargarEstadosFallback() {
+    const estados = [
+        {id_estado: 1, estado: 'Amazonas'}, {id_estado: 2, estado: 'Anzoátegui'},
+        {id_estado: 3, estado: 'Apure'}, {id_estado: 4, estado: 'Aragua'},
+        {id_estado: 5, estado: 'Barinas'}, {id_estado: 6, estado: 'Bolívar'},
+        {id_estado: 7, estado: 'Carabobo'}, {id_estado: 8, estado: 'Cojedes'},
+        {id_estado: 9, estado: 'Delta Amacuro'}, {id_estado: 10, estado: 'Falcón'},
+        {id_estado: 11, estado: 'Guárico'}, {id_estado: 12, estado: 'Lara'},
+        {id_estado: 13, estado: 'Mérida'}, {id_estado: 14, estado: 'Miranda'},
+        {id_estado: 15, estado: 'Monagas'}, {id_estado: 16, estado: 'Nueva Esparta'},
+        {id_estado: 17, estado: 'Portuguesa'}, {id_estado: 18, estado: 'Sucre'},
+        {id_estado: 19, estado: 'Táchira'}, {id_estado: 20, estado: 'Trujillo'},
+        {id_estado: 21, estado: 'La Guaira'}, {id_estado: 22, estado: 'Yaracuy'},
+        {id_estado: 23, estado: 'Zulia'}, {id_estado: 24, estado: 'Distrito Capital'}
+    ];
+    let options = '<option value="">Seleccione un estado...</option>';
+    for (let i = 0; i < estados.length; i++) {
+        options += `<option value="${estados[i].id_estado}">${estados[i].estado}</option>`;
+    }
+    $('#estado').html(options).prop('disabled', false);
+}
+    
+    // Formulario de edición - Guardar cambios
+    $('#form-usuario').submit(function(e) {
+        e.preventDefault();
+        
+        if (!edit) {
+            alert('Primero haga clic en "Editar"');
+            return false;
+        }
+        
+        // Construir dirección completa
+        var estado_nombre = $('#estado option:selected').text();
+        var ciudad_nombre = $('#ciudad option:selected').text();
+        var municipio_nombre = $('#municipio option:selected').text();
+        var parroquia_nombre = $('#parroquia option:selected').text();
+        var direccion_detallada = $('#direccion_detallada').val();
+        
+        var direccion_completa = '';
+        
+        if (estado_nombre && estado_nombre !== 'Seleccione un estado...' && estado_nombre !== '') {
+            direccion_completa = estado_nombre;
+        }
+        if (ciudad_nombre && ciudad_nombre !== 'Seleccione una ciudad...' && ciudad_nombre !== '' && ciudad_nombre !== 'Cargando ciudades...') {
+            direccion_completa += (direccion_completa ? ', ' : '') + ciudad_nombre;
+        }
+        if (municipio_nombre && municipio_nombre !== 'Seleccione un municipio...' && municipio_nombre !== '' && municipio_nombre !== 'Cargando municipios...') {
+            direccion_completa += (direccion_completa ? ', ' : '') + municipio_nombre;
+        }
+        if (parroquia_nombre && parroquia_nombre !== 'Seleccione una parroquia...' && parroquia_nombre !== '' && parroquia_nombre !== 'Cargando parroquias...') {
+            direccion_completa += (direccion_completa ? ', ' : '') + parroquia_nombre;
+        }
+        if (direccion_detallada && direccion_detallada !== '') {
+            direccion_completa += (direccion_completa ? ' - ' : '') + direccion_detallada;
+        }
+        
+        var telefono = $('#telefono').val();
+        var correo = $('#correo').val();
+        var sexo = $('#sexo').val();
+        var adicional = $('#adicional').val();
+        
+        console.log('Guardando datos:', {id_usuario, direccion_completa, telefono, correo, sexo, adicional});
+        
+        var $btn = $(this).find('button[type="submit"]');
+        var originalText = $btn.html();
+        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Guardando...');
+        
+        $.ajax({
+            url: APP_URL + '/api/administradores/editar',
+            type: 'POST',
+            data: {
+                id_administrador: id_usuario,
+                telefono: telefono,
+                direccion: direccion_completa,
+                correo: correo,
+                sexo: sexo,
+                adicional: adicional
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log('Respuesta del servidor:', response);
+                
+                if (response.success) {
+                    $('#editado').show(1000);
+                    setTimeout(function() { 
+                        $('#editado').hide(2000); 
+                    }, 3000);
+                    
+                    edit = false;
+                    
+                    // Deshabilitar campos después de guardar
+                    $('#telefono, #correo, #sexo, #adicional, #estado, #ciudad, #municipio, #parroquia, #direccion_detallada').prop('disabled', true);
+                    
+                    // Restaurar estilo del botón guardar
+                    $('.btn-success')
+                        .removeClass('btn-success')
+                        .addClass('btn-outline-success')
+                        .prop('disabled', true);
+                    
+                    // Recargar datos del administrador
+                    cargarDatosAdministrador();
+                    
+                    alert('¡Datos actualizados correctamente!');
+                } else {
+                    $('#noeditado').show(1000);
+                    setTimeout(function() { 
+                        $('#noeditado').hide(2000); 
+                    }, 3000);
+                    alert(response.error || 'Error al guardar los cambios');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en AJAX:', error);
+                $('#noeditado').show(1000);
+                setTimeout(function() { 
+                    $('#noeditado').hide(2000); 
+                }, 3000);
+                alert('Error de conexión: ' + status);
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html(originalText);
+            }
+        });
+        
+        return false;
+    });
+    
+    // Cambiar contraseña
+    $('#form-pass').submit(function(e) {
+        e.preventDefault();
+        
+        var oldpass = $('#oldpass').val();
+        var newpass = $('#newpass').val();
+        
+        if (newpass.length < 6) {
+            alert('La nueva contraseña debe tener al menos 6 caracteres');
+            return false;
+        }
+        
+        var $btn = $(this).find('button[type="submit"]');
+        var originalText = $btn.html();
+        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
+        
+        $.ajax({
+            url: APP_URL + '/api/administradores/cambiar-password',
+            type: 'POST',
+            data: {
+                id_administrador: id_usuario,
+                oldpass: oldpass,
+                newpass: newpass
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.resultado === 'update') {
+                    $('#update').show(1000);
+                    setTimeout(function() { 
+                        $('#update').hide(2000); 
+                        $('#cambiocontra').modal('hide');
+                    }, 2000);
+                    $('#form-pass').trigger('reset');
+                } else {
+                    $('#noupdate').show(1000);
+                    setTimeout(function() { 
+                        $('#noupdate').hide(2000); 
+                    }, 2000);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cambiar contraseña:', error);
+                alert('Error de conexión: ' + status);
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html(originalText);
+            }
+        });
+    });
+    
+    // Cambiar foto
+    $('#form-photo').submit(function(e) {
+        e.preventDefault();
+        
+        var fileInput = $(this).find('input[type="file"]')[0];
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert('Por favor seleccione una imagen');
+            return;
+        }
+        
+        var formData = new FormData(this);
+        formData.append('id_administrador', id_usuario);
+        
+        var $btn = $(this).find('button[type="submit"]');
+        var originalText = $btn.html();
+        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Subiendo...');
+        
+        $.ajax({
+            url: APP_URL + '/api/administradores/cambiar-foto',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(response) {
+                if (response.alert === 'edit') {
+                    var timestamp = new Date().getTime();
+                    var nuevaRuta = response.ruta + '?t=' + timestamp;
+                    
+                    $('#avatar1, #avatar2, #avatar3, #avatar4, #avatar_nav').attr('src', nuevaRuta);
+                    
+                    $('#edit').show(1000);
+                    setTimeout(function() { 
+                        $('#edit').hide(2000); 
+                    }, 3000);
+                    
+                    $('#form-photo').trigger('reset');
+                    
+                    setTimeout(function() { 
+                        $('#cambiophoto').modal('hide'); 
+                    }, 1500);
+                    
+                } else {
+                    $('#noedit').show(1000);
+                    setTimeout(function() { 
+                        $('#noedit').hide(2000); 
+                    }, 3000);
+                    alert(response.error || 'Error al cambiar la foto');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cambiar foto:', error);
+                $('#noedit').show(1000);
+                setTimeout(function() { 
+                    $('#noedit').hide(2000); 
+                }, 3000);
+                alert('Error al cambiar la foto. Verifique el tipo de archivo (JPG, PNG, GIF)');
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html(originalText);
+            }
+        });
+    });
+});
+// ==================== FUNCIONES DE UBICACIÓN Y EVENTOS ====================
+
+// Eventos de cambio para selects de ubicación
+$(document).on('change', '#estado', function() {
+    var id_estado = $(this).val();
+    console.log('Cambió estado, ID:', id_estado);
+    
+    if (id_estado) {
+        cargarCiudades(id_estado);
+        cargarMunicipios(id_estado);
+    } else {
+        $('#ciudad').html('<option value="">Seleccione un estado primero...</option>').prop('disabled', true);
+        $('#municipio').html('<option value="">Seleccione un estado primero...</option>').prop('disabled', true);
+        $('#parroquia').html('<option value="">Seleccione un municipio primero...</option>').prop('disabled', true);
+    }
+});
+
+$(document).on('change', '#municipio', function() {
+    var id_municipio = $(this).val();
+    console.log('Cambió municipio, ID:', id_municipio);
+    
+    if (id_municipio) {
+        cargarParroquias(id_municipio);
+    } else {
+        $('#parroquia').html('<option value="">Seleccione un municipio primero...</option>').prop('disabled', true);
+    }
+});
+
+// Función para cargar ciudades
+function cargarCiudades(id_estado) {
+    if (!id_estado) return;
+    
+    console.log('Cargando ciudades para estado ID:', id_estado);
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/ciudades',
+        type: 'POST',
+        data: { id_estado: id_estado },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta ciudades:', response);
+            
+            // Manejar formato ApiResponse
+            var ciudades = [];
+            if (response.success && response.data) {
+                ciudades = response.data;
+            } else if (Array.isArray(response)) {
+                ciudades = response;
+            } else if (response.ciudades) {
+                ciudades = response.ciudades;
+            } else {
+                ciudades = response;
+            }
+            
+            if (!Array.isArray(ciudades)) {
+                ciudades = [];
+            }
+            
+            let options = '<option value="">Seleccione una ciudad...</option>';
+            for (let i = 0; i < ciudades.length; i++) {
+                let ciudad = ciudades[i];
+                let id = ciudad.id_ciudad || ciudad.id;
+                let nombre = ciudad.ciudad || ciudad.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+            }
+            $('#ciudad').html(options).prop('disabled', false);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar ciudades:', error);
+            $('#ciudad').html('<option value="">Error al cargar ciudades</option>').prop('disabled', false);
+        }
+    });
+}
+
+// Función para cargar municipios
+function cargarMunicipios(id_estado) {
+    if (!id_estado) return;
+    
+    console.log('Cargando municipios para estado ID:', id_estado);
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/municipios',
+        type: 'POST',
+        data: { id_estado: id_estado },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta municipios:', response);
+            
+            // Manejar formato ApiResponse
+            var municipios = [];
+            if (response.success && response.data) {
+                municipios = response.data;
+            } else if (Array.isArray(response)) {
+                municipios = response;
+            } else if (response.municipios) {
+                municipios = response.municipios;
+            } else {
+                municipios = response;
+            }
+            
+            if (!Array.isArray(municipios)) {
+                municipios = [];
+            }
+            
+            let options = '<option value="">Seleccione un municipio...</option>';
+            for (let i = 0; i < municipios.length; i++) {
+                let municipio = municipios[i];
+                let id = municipio.id_municipio || municipio.id;
+                let nombre = municipio.municipio || municipio.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+            }
+            $('#municipio').html(options).prop('disabled', false);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar municipios:', error);
+            $('#municipio').html('<option value="">Error al cargar municipios</option>').prop('disabled', false);
+        }
+    });
+}
+
+// Función para cargar parroquias
+function cargarParroquias(id_municipio) {
+    if (!id_municipio) return;
+    
+    console.log('Cargando parroquias para municipio ID:', id_municipio);
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/parroquias',
+        type: 'POST',
+        data: { id_municipio: id_municipio },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta parroquias:', response);
+            
+            // Manejar formato ApiResponse
+            var parroquias = [];
+            if (response.success && response.data) {
+                parroquias = response.data;
+            } else if (Array.isArray(response)) {
+                parroquias = response;
+            } else if (response.parroquias) {
+                parroquias = response.parroquias;
+            } else {
+                parroquias = response;
+            }
+            
+            if (!Array.isArray(parroquias)) {
+                parroquias = [];
+            }
+            
+            let options = '<option value="">Seleccione una parroquia...</option>';
+            for (let i = 0; i < parroquias.length; i++) {
+                let parroquia = parroquias[i];
+                let id = parroquia.id_parroquia || parroquia.id;
+                let nombre = parroquia.parroquia || parroquia.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+            }
+            $('#parroquia').html(options).prop('disabled', false);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar parroquias:', error);
+            $('#parroquia').html('<option value="">Error al cargar parroquias</option>').prop('disabled', false);
+        }
+    });
+}
+
+// Función para cargar estados sin selección (para nuevos registros)
+function cargarEstados() {
+    console.log('Cargando lista de estados...');
+    
+    $.ajax({
+        url: APP_URL + '/api/ubicacion/estados',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respuesta estados:', response);
+            
+            // Manejar formato ApiResponse
+            var estados = [];
+            if (response.success && response.data) {
+                estados = response.data;
+            } else if (Array.isArray(response)) {
+                estados = response;
+            } else if (response.estados) {
+                estados = response.estados;
+            } else {
+                estados = response;
+            }
+            
+            if (!Array.isArray(estados)) {
+                estados = [];
+            }
+            
+            let options = '<option value="">Seleccione un estado...</option>';
+            for (let i = 0; i < estados.length; i++) {
+                let estado = estados[i];
+                let id = estado.id_estado || estado.id;
+                let nombre = estado.estado || estado.nombre;
+                options += `<option value="${id}">${nombre}</option>`;
+            }
+            $('#estado').html(options).prop('disabled', false);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar estados:', error);
+            cargarEstadosFallback();
+        }
+    });
+}
+
+// Función fallback para estados
+function cargarEstadosFallback() {
+    console.log('Usando fallback de estados');
+    const estados = [
+        {id_estado: 1, estado: 'Amazonas'}, {id_estado: 2, estado: 'Anzoátegui'},
+        {id_estado: 3, estado: 'Apure'}, {id_estado: 4, estado: 'Aragua'},
+        {id_estado: 5, estado: 'Barinas'}, {id_estado: 6, estado: 'Bolívar'},
+        {id_estado: 7, estado: 'Carabobo'}, {id_estado: 8, estado: 'Cojedes'},
+        {id_estado: 9, estado: 'Delta Amacuro'}, {id_estado: 10, estado: 'Falcón'},
+        {id_estado: 11, estado: 'Guárico'}, {id_estado: 12, estado: 'Lara'},
+        {id_estado: 13, estado: 'Mérida'}, {id_estado: 14, estado: 'Miranda'},
+        {id_estado: 15, estado: 'Monagas'}, {id_estado: 16, estado: 'Nueva Esparta'},
+        {id_estado: 17, estado: 'Portuguesa'}, {id_estado: 18, estado: 'Sucre'},
+        {id_estado: 19, estado: 'Táchira'}, {id_estado: 20, estado: 'Trujillo'},
+        {id_estado: 21, estado: 'La Guaira'}, {id_estado: 22, estado: 'Yaracuy'},
+        {id_estado: 23, estado: 'Zulia'}, {id_estado: 24, estado: 'Distrito Capital'}
+    ];
+    
+    let options = '<option value="">Seleccione un estado...</option>';
+    for (let i = 0; i < estados.length; i++) {
+        options += `<option value="${estados[i].id_estado}">${estados[i].estado}</option>`;
+    }
+    $('#estado').html(options).prop('disabled', false);
+}
+</script>
+
+<script src="<?php echo APP_URL; ?>/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+=======
+<script src="<?php echo APP_URL; ?>/js/administrador.js"></script>
+<script src="<?php echo APP_URL; ?>/js/ubicacion.js"></script>
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+</body>
+</html>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852

@@ -1,7 +1,18 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_consultorio_editar.php
 // Contenido principal para la edición de consultorios
 // Este archivo se renderiza dentro del layout base dashboard.php
+=======
+<<<<<<< HEAD
+=======
+// NO iniciar sesión aquí - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Administrador';
@@ -178,6 +189,7 @@ $id_consultorio = $id_consultorio ?? $_GET['id'] ?? 0;
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -186,9 +198,154 @@ $id_consultorio = $id_consultorio ?? $_GET['id'] ?? 0;
                 <h1><i class="fas fa-edit"></i> Editar Consultorio</h1>
             </div>
         </div>
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+    <title>Administrador | Editar Consultorio</title>
+    
+    <style>
+        .checkbox-group {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .checkbox-group .form-check {
+            margin-bottom: 5px;
+        }
+        .preview-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ffc107;
+        }
+        .csrf-info {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">Cerrar sesión</a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<<<<<<< HEAD
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BioVital</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+=======
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+           <div class="image">
+    <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+</div>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+<<<<<<< HEAD
+                </li>               
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                 <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link active">
+=======
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link">
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 
+<<<<<<< HEAD
 <section class="content">
     <div class="container-fluid">
         <input type="hidden" id="id_consultorio" value="<?php echo $id_consultorio; ?>">
@@ -202,6 +359,20 @@ $id_consultorio = $id_consultorio ?? $_GET['id'] ?? 0;
                     <div class="bv-role-tag mt-2">
                         <i class="fas fa-hospital-user"></i> Infraestructura
                     </div>
+=======
+<<<<<<< HEAD
+<!-- **********************Content Wrapper************************** -->
+=======
+
+<!-- Content Wrapper -->
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1><i class="fas fa-edit"></i> Editar Consultorio</h1>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 </div>
                 <div class="d-none d-md-block">
                     <i class="fas fa-chart-line fa-3x" style="opacity: 0.3;"></i>
@@ -257,6 +428,122 @@ $id_consultorio = $id_consultorio ?? $_GET['id'] ?? 0;
                                         <label for="cierre" class="required-field">Cierre Habitual</label>
                                         <input type="time" class="form-control" id="cierre" name="cierre" required>
                                     </div>
+<<<<<<< HEAD
+=======
+                                    <small class="form-text text-muted">Seleccione las especialidades que se atienden en este consultorio</small>
+                                </div>
+
+                                <h4 class="mt-4"><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="required-field">Estado</label>
+                                            <select class="form-control" id="estado" name="estado" required>
+                                                <option value="">Seleccione un estado...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="required-field">Ciudad</label>
+                                            <select class="form-control" id="ciudad" name="ciudad" required disabled>
+                                                <option value="">Primero seleccione un estado...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Municipio</label>
+                                            <select class="form-control" id="municipio" name="municipio" disabled>
+                                                <option value="">Primero seleccione una ciudad...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Parroquia</label>
+                                            <select class="form-control" id="parroquia" name="parroquia" disabled>
+                                                <option value="">Primero seleccione un municipio...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                                <div class="form-group">
+                                    <label class="required-field">Dirección Detallada</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Av. Principal, Edificio, Número, etc.">
+                                    <small class="form-text text-muted">Ej: Av. Principal, Edificio Central, Piso 3, Oficina 5</small>
+                                </div>
+<<<<<<< HEAD
+                                <h4 class="mt-4"><i class="fas fa-address-card"></i> Datos de Contacto</h4>
+                                <hr>                                
+=======
+
+                                <h4 class="mt-4"><i class="fas fa-address-card"></i> Datos de Contacto</h4>
+                                <hr>
+                                
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Teléfono Interno/Directo</label>
+                                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ej: 0212-5551234">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Email del Consultorio</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Ej: consultorio@correo.com">
+                                        </div>
+                                    </div>
+<<<<<<< HEAD
+                                </div>                                
+=======
+                                </div>
+                                
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                                <button type="submit" class="btn btn-warning btn-lg btn-block">
+                                    <i class="fas fa-save"></i> Actualizar Consultorio
+                                </button>
+                                <a href="<?php echo APP_URL; ?>/consultorios/detalle?id=<?php echo $id_consultorio; ?>" class="btn btn-secondary btn-block mt-2">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </a>
+                                
+                                <div class="csrf-info mt-3">
+                                    <i class="fas fa-shield-alt"></i> Formulario protegido contra CSRF - Todos los cambios son seguros
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card card-outline card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-eye"></i> Vista Previa</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="preview-card p-3">
+                                <h4 id="preview_nombre">Nombre del Consultorio</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> <span id="preview_ciudad">Ciudad</span></p>
+                                <p id="preview_descripcion" class="text-muted small">Descripción</p>
+                                <p><i class="fas fa-phone"></i> <span id="preview_telefono">-</span></p>
+                                <p><i class="fas fa-envelope"></i> <span id="preview_email">-</span></p>
+                                <hr>
+                                <div class="text-center">
+                                    <span class="badge badge-success">Consultorio disponible</span>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                                 </div>
                             </div>
 
@@ -412,6 +699,7 @@ $id_consultorio = $id_consultorio ?? $_GET['id'] ?? 0;
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </section>
 
 <script>
@@ -947,3 +1235,20 @@ $(document).ready(function() {
     cargarDatosConsultorio();
 });
 </script>
+=======
+    <strong>Copyright &copy; 2024 BioVital.</strong> Todos los derechos reservados.
+</footer>
+<<<<<<< HEAD
+</div>
+=======
+
+</div>
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+<script src="<?php echo APP_URL; ?>/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo APP_URL; ?>/js/consultorio.js"></script>
+
+</body>
+</html>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852

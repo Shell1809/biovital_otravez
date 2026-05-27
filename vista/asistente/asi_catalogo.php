@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // vista/asistente/asi_catalogo.php
 // Contenido principal para el dashboard del asistente
 // Este archivo se renderiza dentro del layout base dashboard.php
@@ -7,6 +8,41 @@
 $nombre_usuario = $nombre_usuario ?? 'Usuario';
 $id_asistente = $id_asistente ?? $_SESSION['usuario'] ?? 0;
 ?>
+=======
+<<<<<<< HEAD
+AuthHelper::checkRoleAndType('asistente', 3, true);
+
+$nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
+?>
+
+=======
+if($_SESSION['us_tipo'] != 3 || $_SESSION['rol'] != 'asistente'){
+    header('Location: ' . APP_URL . '/login/asistente');
+    exit();
+}
+$nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
+?>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>var APP_URL = '<?php echo APP_URL; ?>';</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo APP_URL; ?>/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Asistente | Panel</title>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 <!-- CSS Adicional para esta vista -->
 <style>
@@ -210,6 +246,7 @@ $id_asistente = $id_asistente ?? $_SESSION['usuario'] ?? 0;
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -242,6 +279,22 @@ $id_asistente = $id_asistente ?? $_SESSION['usuario'] ?? 0;
                             <i class="fas fa-chart-line"></i> Turno: Mañana
                         </span>
                     </div>
+=======
+    <!-- Main Sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="<?php echo APP_URL; ?>/panel/asistente" class="brand-link">
+            <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity:.8">
+<<<<<<< HEAD
+            <span class="brand-text font-weight-light">BioVital</span>
+=======
+            <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+        </a>
+        <div class="sidebar">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img id="avatar4" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User">
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                 </div>
                 <div class="d-none d-md-block">
                     <i class="fas fa-chart-line fa-3x" style="opacity: 0.3;"></i>
@@ -274,6 +327,36 @@ $id_asistente = $id_asistente ?? $_SESSION['usuario'] ?? 0;
                         <i class="fas fa-user-plus"></i> <span>Hoy</span>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+                <!-- Quick Access Cards -->
+                <div class="bv-dash-grid">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="bv-dash-card asistente bv-animate bv-animate-delay-1">
+                        <div class="bv-card-icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+                        <h3>Recetas</h3>
+                        <p>Gestiona y visualiza las recetas médicas del sistema.</p>
+                    </a>
+<<<<<<< HEAD
+                    <a href="#" class="bv-dash-card asistente bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="fas fa-procedures"></i></div>
+                        <h3>Triaje</h3>
+                        <p>Registra signos vitales y motivos de consulta previos a la atención.</p>
+=======
+                    <a href="<?php echo APP_URL; ?>/documentos" class="bv-dash-card asistente bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="fas fa-file-medical"></i></div>
+                        <h3>Documentos médicos</h3>
+                        <p>Visualiza recipes, constancias, justificativos, diagnósticos y laboratorios para imprimir o guardar en PDF.</p>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                    </a>
+                    <a href="<?php echo APP_URL; ?>/perfil" class="bv-dash-card asistente bv-animate bv-animate-delay-3">
+                        <div class="bv-card-icon"><i class="fas fa-user-cog"></i></div>
+                        <h3>Mi Perfil</h3>
+                        <p>Actualiza tu información personal y datos de contacto.</p>
+                    </a>
+                </div>
+
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="stat-card bv-animate bv-animate-delay-3">

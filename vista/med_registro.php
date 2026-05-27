@@ -1,16 +1,34 @@
+<<<<<<< HEAD
 <?php
 // vista/med_registro.php
 ?>
+=======
+<<<<<<< HEAD
+<?php
+// vista/med_registro.php
+?>
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Médico - BioVital</title>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     
     <script>
         var APP_URL = '<?php echo APP_URL; ?>';
     </script>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -253,9 +271,22 @@ include_once $securityPath;
                 </div>
 
                  <!-- ==================== redirecciona a login ==================== -->
+<<<<<<< HEAD
               <div class="login-link">
     <a href="http://localhost/biovital/"><i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí</a>
 </div>
+=======
+<<<<<<< HEAD
+              <div class="login-link">
+    <a href="http://localhost/biovital/"><i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí</a>
+</div>
+=======
+                <div class="login-link">
+                  <a href="<?php echo APP_URL; ?>/login/medico" class="login-link">
+                  <i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión aquí </a>
+                </div>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
   <!-- ==================== FIN ==================== -->
                 
              

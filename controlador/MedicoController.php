@@ -19,6 +19,10 @@ class MedicoController {
     }
     
     // API: Buscar médico (para mostrar datos)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
    public function buscar() {
     $id_medico = $_POST['dato'] ?? $_POST['id_medico'] ?? 0;
     $id_sesion = $_SESSION['usuario'];
@@ -28,6 +32,7 @@ class MedicoController {
     if($id_medico != $id_sesion) {
         ApiResponse::error('No autorizado para ver este perfil', 'unauthorized', [], 403);
         return;
+<<<<<<< HEAD
     }
     
     $medico = new Medico();
@@ -68,6 +73,100 @@ class MedicoController {
     ApiResponse::success($json, 'datos_cargados', 'Datos del médico cargados correctamente');
 }
     
+=======
+    }
+    
+    $medico = new Medico();
+    $fecha_actual = new DateTime();
+    $medico->obtener_datos($id_medico);
+    
+    if(empty($medico->objetos)) {
+        ApiResponse::notFound('Médico');
+        return;
+    }
+    
+    $json = array();
+    foreach ($medico->objetos as $objeto) {
+        $fecha_nacimiento = $objeto->fecha_nacimiento_medico;
+        $nacimiento = new DateTime($fecha_nacimiento);
+        $edad = $nacimiento->diff($fecha_actual);
+        
+        $avatar_path = (!empty($objeto->avatar_medico) && $objeto->avatar_medico != 'avatarDES.jpg') 
+                       ? APP_URL . '/img/' . $objeto->avatar_medico 
+                       : APP_URL . '/img/avatarDES.jpg';
+        
+        $json = array(
+            'nombre' => $objeto->nombre_medico ?? '',
+            'apellidos' => $objeto->apellido_medico ?? '',
+            'fecha_nacimiento' => $edad->y,
+            'cedula' => $objeto->cedula_medico ?? '',
+            'tipo' => $objeto->nombre_tipo ?? 'Médico',
+            'telefono' => $objeto->telefono_medico ?? '',
+            'direccion' => $objeto->direccion_medico ?? '',
+            'correo' => $objeto->correo_medico ?? '',
+            'sexo' => $objeto->sexo_medico ?? '',
+            'adicional' => $objeto->adicional_medico ?? '',
+            'avatar' => $avatar_path
+        );
+    }
+    
+    // Devolver en formato ApiResponse
+    ApiResponse::success($json, 'datos_cargados', 'Datos del médico cargados correctamente');
+}
+    
+=======
+    public function buscar() {
+        $id_medico = $_POST['dato'] ?? $_POST['id_medico'] ?? 0;
+        $id_sesion = $_SESSION['usuario'];
+        
+        // Si viene como 'dato' desde medico.js
+        if ($id_medico == 0 && isset($_POST['dato'])) {
+            $id_medico = $_POST['dato'];
+        }
+        
+        if($id_medico != $id_sesion) {
+            jsonResponse(['error' => 'No autorizado para ver este perfil']);
+            return;
+        }
+        
+        $medico = new Medico();
+        $fecha_actual = new DateTime();
+        $medico->obtener_datos($id_medico);
+        
+        if(empty($medico->objetos)) {
+            jsonResponse(['error' => 'No se encontró el médico']);
+            return;
+        }
+        
+        $json = array();
+        foreach ($medico->objetos as $objeto) {
+            $fecha_nacimiento = $objeto->fecha_nacimiento_medico;
+            $nacimiento = new DateTime($fecha_nacimiento);
+            $edad = $nacimiento->diff($fecha_actual);
+            
+            $avatar_path = (!empty($objeto->avatar_medico) && $objeto->avatar_medico != 'avatarDES.jpg') 
+                           ? APP_URL . '/img/' . $objeto->avatar_medico 
+                           : APP_URL . '/img/avatarDES.jpg';
+            
+            $json = array(
+                'nombre' => $objeto->nombre_medico,
+                'apellidos' => $objeto->apellido_medico,
+                'fecha_nacimiento' => $edad->y,
+                'cedula' => $objeto->cedula_medico,
+                'tipo' => $objeto->nombre_tipo,
+                'telefono' => $objeto->telefono_medico,
+                'direccion' => $objeto->direccion_medico,
+                'correo' => $objeto->correo_medico,
+                'sexo' => $objeto->sexo_medico,
+                'adicional' => $objeto->adicional_medico,
+                'avatar' => $avatar_path
+            );
+        }
+        jsonResponse($json);
+    }
+    
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     // API: Capturar datos para editar (CORREGIDO)
     public function capturarDatos() {
         $id_medico = $_POST['id_medico'] ?? 0;

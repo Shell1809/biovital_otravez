@@ -1,12 +1,24 @@
 <?php
+<<<<<<< HEAD
 // vista/administrador/adm_usuarios.php
 // Contenido principal para la gestión de usuarios del sistema
 // Este archivo se renderiza dentro del layout base dashboard.php
+=======
+<<<<<<< HEAD
+=======
+// NO iniciar sesión aquí - el Front Controller ya lo hace
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+if($_SESSION['us_tipo'] != 4 || $_SESSION['rol'] != 'administrador'){
+    header('Location: ' . APP_URL . '/login/administrador');
+    exit();
+}
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Administrador';
 ?>
 
+<<<<<<< HEAD
 <!-- CSS Adicional para esta vista -->
 <style>
     .user-card {
@@ -59,6 +71,18 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
     .badge-role-medico { background-color: #d1fae5; color: #065f46; }
     .badge-role-asistente { background-color: #fef3c7; color: #92400e; }
     .badge-role-administrador { background-color: #fee2e2; color: #991b1b; }
+=======
+    <script>
+        var APP_URL = '<?php echo APP_URL; ?>';
+    </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/config.js"></script>
+    <script src="<?php echo APP_URL; ?>/js/csrf.js"></script>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     
     .badge-status {
         font-size: 0.65rem;
@@ -221,6 +245,7 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -229,6 +254,107 @@ $nombre_usuario = $nombre_usuario ?? 'Administrador';
                 <h1><i class="fas fa-users"></i> Gestión de Usuarios</h1>
             </div>
         </div>
+=======
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <a href="<?php echo APP_URL; ?>/logout" class="btn btn-danger btn-sm">Cerrar sesión</a>
+    </ul>
+</nav>
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="<?php echo APP_URL; ?>/panel/administrador" class="brand-link">
+        <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+<<<<<<< HEAD
+        <span class="brand-text font-weight-light">BioVital</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+=======
+        <span class="brand-text font-weight-light">BIOVITAL</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+           <div class="image">
+    <img id="avatar_nav" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+</div>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+            <div class="info">
+                <a href="#" class="d-block"><?php echo htmlspecialchars($nombre_usuario); ?></a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">
+                    <i class="fas fa-user-shield"></i> Usuario
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Datos personales</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-line"></i> Gestión
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/administrador/usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Usuarios</p>
+                    </a>
+                </li>
+<<<<<<< HEAD
+
+               
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                 <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/especialidades" class="nav-link">
+                        <i class="nav-icon fas fa-stethoscope"></i>
+                        <p>Especialidades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link active">
+=======
+                <li class="nav-header">
+                    <i class="fas fa-hospital-user"></i> Clínica
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/consultorios" class="nav-link">
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Consultorios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo APP_URL; ?>/recetas" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                        <p>Recetas</p>
+                    </a>
+                </li>
+                <li class="nav-header">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>Estadísticas</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 

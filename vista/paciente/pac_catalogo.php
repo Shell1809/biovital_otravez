@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // vista/paciente/pac_catalogo.php
 // Contenido principal para el dashboard del paciente
 // Este archivo se renderiza dentro del layout base dashboard.php
@@ -6,6 +7,19 @@
 // Los datos vienen del controlador a través de $data
 $nombre_usuario = $nombre_usuario ?? 'Usuario';
 $id_paciente = $id_paciente ?? $_SESSION['usuario'] ?? 0;
+=======
+<<<<<<< HEAD
+
+AuthHelper::checkRoleAndType('paciente', 1, true);
+
+=======
+if($_SESSION['us_tipo'] != 1 || $_SESSION['rol'] != 'paciente'){
+    header('Location: ' . APP_URL . '/login/paciente');
+    exit();
+}
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+$nombre_usuario = htmlspecialchars($_SESSION['nombre_us'] ?? 'Usuario');
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 ?>
 
 <!-- CSS Adicional para esta vista -->
@@ -216,6 +230,7 @@ $id_paciente = $id_paciente ?? $_SESSION['usuario'] ?? 0;
     }
 </style>
 
+<<<<<<< HEAD
 <!-- Content Header -->
 <div class="content-header">
     <div class="container-fluid">
@@ -224,6 +239,130 @@ $id_paciente = $id_paciente ?? $_SESSION['usuario'] ?? 0;
                 <h1><i class="fas fa-user-injured"></i> Panel del Paciente</h1>
             </div>
         </div>
+=======
+    <!-- Main Sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="<?php echo APP_URL; ?>/panel/paciente" class="brand-link">
+            <img src="<?php echo APP_URL; ?>/img/logo_azul.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+<<<<<<< HEAD
+            <span class="brand-text font-weight-light">BioVital</span>
+=======
+            <span class="brand-text font-weight-light">BIOVITAL</span>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+        </a>
+        <div class="sidebar">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img id="avatar4" src="<?php echo APP_URL; ?>/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block"><?php echo $nombre_usuario; ?></a>
+                </div>
+            </div>
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                    <li class="nav-header">Usuario</li>
+                    <li class="nav-item">
+                        <a href="<?php echo APP_URL; ?>/perfil" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i><p>Datos personales</p>
+                        </a>
+                    </li>
+                    <li class="nav-header">Clínica</li>
+                    <li class="nav-item">
+                        <a href="<?php echo APP_URL; ?>/paciente/recetas" class="nav-link">
+                            <i class="nav-icon fas fa-prescription-bottle-alt"></i><p>Mis Recetas</p>
+                        </a>
+                    </li>
+<<<<<<< HEAD
+=======
+                    <li class="nav-item">
+                        <a href="<?php echo APP_URL; ?>/documentos" class="nav-link">
+                            <i class="nav-icon fas fa-file-medical"></i><p>Documentos médicos</p>
+                        </a>
+                    </li>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                    <li class="nav-header">Citas</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i><p>Mis Citas</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6"><h1>Panel del Paciente</h1></div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="<?php echo APP_URL; ?>/panel/paciente">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <!-- Welcome Banner -->
+                <div class="bv-welcome-banner bv-animate">
+                    <h2>Bienvenido, <?php echo $nombre_usuario; ?></h2>
+                    <p>Gestiona tus citas, historial y estudios desde un solo lugar.</p>
+                    <div class="bv-role-tag"><i class="fas fa-user-injured"></i> Paciente</div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="row">
+                    <div class="col-lg-4 col-6">
+                        <div class="small-box bg-info bv-animate bv-animate-delay-1">
+                            <div class="inner">
+                                <h3 id="total_recetas">0</h3>
+                                <p>Mis Recetas</p>
+                            </div>
+                            <div class="icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+                            <a href="<?php echo APP_URL; ?>/paciente/recetas" class="small-box-footer">
+                                Ver recetas <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Cards -->
+                <div class="bv-dash-grid">
+                    <a href="<?php echo APP_URL; ?>/paciente/recetas" class="bv-dash-card bv-animate bv-animate-delay-1">
+                        <div class="bv-card-icon"><i class="fas fa-file-medical"></i></div>
+                        <h3>Historial Médico</h3>
+                        <p>Accede a tus reportes, recetas e informes médicos previos.</p>
+                    </a>
+<<<<<<< HEAD
+                    <a href="#" class="bv-dash-card bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="far fa-calendar-check"></i></div>
+                        <h3>Mis Citas</h3>
+                        <p>Revisa tus próximas citas o programa una nueva consulta.</p>
+=======
+                    <a href="<?php echo APP_URL; ?>/documentos" class="bv-dash-card bv-animate bv-animate-delay-2">
+                        <div class="bv-card-icon"><i class="fas fa-file-medical-alt"></i></div>
+                        <h3>Documentos médicos</h3>
+                        <p>Visualiza tus recipes, constancias, justificativos, diagnósticos y estudios de laboratorio.</p>
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+                    </a>
+                    <a href="<?php echo APP_URL; ?>/perfil" class="bv-dash-card bv-animate bv-animate-delay-3">
+                        <div class="bv-card-icon"><i class="fas fa-user-cog"></i></div>
+                        <h3>Datos Personales</h3>
+                        <p>Actualiza tu información personal y datos de contacto.</p>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     </div>
 </div>
 

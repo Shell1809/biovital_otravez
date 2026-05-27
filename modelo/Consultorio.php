@@ -8,7 +8,16 @@ class Consultorio {
     public function __construct() {
         $db = new Conexion();
         $this->acceso = $db->pdo;
+<<<<<<< HEAD
     }    
+=======
+<<<<<<< HEAD
+    }    
+=======
+    }
+    
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
    
     // ==================== CONSULTORIOS ====================
 function listar($busqueda = '') {

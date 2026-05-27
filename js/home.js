@@ -6,7 +6,15 @@ const navMenu = document.getElementById('navMenu');
 document.addEventListener('DOMContentLoaded', function () {
   setupNavigation();
   setupScrollEffects();
+<<<<<<< HEAD
   // El carrusel ahora es nativo de Bootstrap 4, no necesita JS manual
+=======
+<<<<<<< HEAD
+  // El carrusel ahora es nativo de Bootstrap 4, no necesita JS manual
+=======
+  setupCarousel();
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
   setupSpecialtyCards();
   setupAnimations();
   setupCounters();
@@ -59,6 +67,80 @@ function setupScrollEffects() {
   });
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// ========== CAROUSEL ==========
+function setupCarousel() {
+  var track = document.querySelector('.carousel-track');
+  var slides = document.querySelectorAll('.carousel-slide');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var indicators = document.querySelectorAll('.indicator');
+
+  if (!track || !slides.length) return;
+
+  var currentSlide = 0;
+  var totalSlides = slides.length;
+  var autoPlayInterval;
+
+  function updateCarousel() {
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    indicators.forEach(function (ind, i) {
+      ind.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+    resetAutoPlay();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+    resetAutoPlay();
+  }
+
+  function goToSlide(i) {
+    currentSlide = i;
+    updateCarousel();
+    resetAutoPlay();
+  }
+
+  function startAutoPlay() { autoPlayInterval = setInterval(nextSlide, 5000); }
+  function resetAutoPlay() { clearInterval(autoPlayInterval); startAutoPlay(); }
+
+  if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+  if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+  indicators.forEach(function (ind, i) {
+    ind.addEventListener('click', function () { goToSlide(i); });
+  });
+
+  // Touch support
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function (e) { touchStartX = e.changedTouches[0].screenX; });
+  track.addEventListener('touchend', function (e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+  });
+
+  track.addEventListener('mouseenter', function () { clearInterval(autoPlayInterval); });
+  track.addEventListener('mouseleave', function () { startAutoPlay(); });
+
+  document.addEventListener('visibilitychange', function () {
+    document.hidden ? clearInterval(autoPlayInterval) : startAutoPlay();
+  });
+
+  updateCarousel();
+  startAutoPlay();
+}
+
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 // ========== SPECIALTY CARDS ==========
 function setupSpecialtyCards() {
   var specialtyInfo = {
@@ -109,6 +191,13 @@ function closeSpecialtyModal() {
   document.getElementById('specialtyModal').classList.remove('show');
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// Close modal on outside click or Escape
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 window.addEventListener('click', function (e) {
   var modal = document.getElementById('specialtyModal');
   if (e.target === modal) closeSpecialtyModal();
@@ -185,6 +274,13 @@ function openLogin(role, iconClass) {
 
     showView('login-view');
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    // Scroll al login
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     setTimeout(function () {
         var el = document.getElementById('login-view');
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -204,6 +300,7 @@ $(document).ready(function () {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
 
         $.ajax({
+<<<<<<< HEAD
             url: APP_URL + '/login',
             type: 'POST',
             data: $(this).serialize(),
@@ -213,6 +310,31 @@ $(document).ready(function () {
                     submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> ¡Acceso concedido!';
                     window.location.href = APP_URL + '/' + response.redirect;
                 } else {
+=======
+<<<<<<< HEAD
+            url: APP_URL + '/login',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> ¡Acceso concedido!';
+                    window.location.href = APP_URL + '/' + response.redirect;
+                } else {
+=======
+            url: APP_URL + '/login',  // ✅ Verifica que APP_URL esté definida correctamente
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+           success: function (response) {
+    if (response.success) {
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> ¡Acceso concedido!';
+        // --- CÓDIGO CORREGIDO ---
+        // response.redirect ya tiene el formato "panel/paciente"
+        window.location.href = APP_URL + '/' + response.redirect;
+    } else {
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
                     loginErrorMsg.textContent = response.error || 'Cédula o contraseña incorrecta';
                     loginError.classList.add('show');
                     submitBtn.disabled = false;
@@ -227,7 +349,15 @@ $(document).ready(function () {
             }
         });
     });
+<<<<<<< HEAD
 });
+=======
+<<<<<<< HEAD
+});
+=======
+});;
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 
 // ========== MAP ==========
 function showMap(location) {
@@ -261,4 +391,12 @@ function setupContactForm() {
       }, 1500);
     });
   }
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852

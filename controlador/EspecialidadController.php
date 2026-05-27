@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
 
 
+=======
+// controlador/EspecialidadController.php
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
 class EspecialidadController {
     
    public function __construct() {
@@ -24,6 +28,7 @@ class EspecialidadController {
     /**
      * Vista: Listado de especialidades
      */
+<<<<<<< HEAD
    public function index() {
         AuthHelper::checkRole('administrador', true);
         
@@ -100,11 +105,55 @@ class EspecialidadController {
     
     ViewHelper::renderDashboard('especialidades/esp_crear', $data, $options);
 }
+=======
+    public function index() {
+        $viewFile = VIEW_PATH . '/especialidades/esp_listado.php';
+        if (file_exists($viewFile)) {
+            renderView('especialidades/esp_listado');
+        } else {
+            error_log("Vista no encontrada: " . $viewFile);
+            die("Error: Vista de especialidades no encontrada");
+        }
+    }
+    
+    /**
+     * Vista: Detalle de especialidad
+     */
+    public function detalle() {
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        
+        if ($id <= 0) {
+            redirect('especialidades');
+        }
+        
+        $viewFile = VIEW_PATH . '/especialidades/esp_detalle.php';
+        if (file_exists($viewFile)) {
+            renderView('especialidades/esp_detalle');
+        } else {
+            error_log("Vista no encontrada: " . $viewFile);
+            die("Error: Vista de detalle no encontrada");
+        }
+    }
+    
+    /**
+     * Vista: Crear especialidad
+     */
+    public function crear() {
+        $viewFile = VIEW_PATH . '/especialidades/esp_crear.php';
+        if (file_exists($viewFile)) {
+            renderView('especialidades/esp_crear');
+        } else {
+            error_log("Vista no encontrada: " . $viewFile);
+            die("Error: Vista de crear especialidad no encontrada");
+        }
+    }
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     
     /**
      * Vista: Editar especialidad
      */
     public function editar() {
+<<<<<<< HEAD
     AuthHelper::checkRole('administrador', true);
     
     $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -165,6 +214,42 @@ class EspecialidadController {
     ViewHelper::renderDashboard('especialidades/esp_asignar_medico', $data, $options);
 }
     
+=======
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        
+        if ($id <= 0) {
+            redirect('especialidades');
+        }
+        
+        $viewFile = VIEW_PATH . '/especialidades/esp_editar.php';
+        if (file_exists($viewFile)) {
+            renderView('especialidades/esp_editar');
+        } else {
+            error_log("Vista no encontrada: " . $viewFile);
+            die("Error: Vista de editar especialidad no encontrada");
+        }
+    }
+    
+    /**
+     * Vista: Asignar médico a especialidad
+     */
+    public function asignarMedico() {
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        
+        if ($id <= 0) {
+            redirect('especialidades');
+        }
+        
+        $viewFile = VIEW_PATH . '/especialidades/esp_asignar_medico.php';
+        if (file_exists($viewFile)) {
+            renderView('especialidades/esp_asignar_medico');
+        } else {
+            error_log("Vista no encontrada: " . $viewFile);
+            die("Error: Vista de asignar médico no encontrada");
+        }
+    }
+    
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     // ==================== API - LISTAR ====================
     
     /**

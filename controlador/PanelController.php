@@ -3,6 +3,7 @@
 
 class PanelController {
     
+<<<<<<< HEAD
   public function paciente() {
     AuthHelper::checkRole('paciente', true);
     
@@ -23,6 +24,35 @@ class PanelController {
     
     ViewHelper::renderDashboard('paciente/pac_catalogo', $data, $options);
 }
+=======
+<<<<<<< HEAD
+   public function paciente() {
+    AuthHelper::checkRole('paciente', true);
+    renderView('paciente/pac_catalogo');
+}
+
+public function medico() {
+    AuthHelper::checkRole('medico', true);
+    renderView('medico/med_catalogo');
+}
+
+public function asistente() {
+    AuthHelper::checkRole('asistente', true);
+    renderView('asistente/asi_catalogo');
+}
+
+public function administrador() {
+    AuthHelper::checkRole('administrador', true);
+    renderView('administrador/adm_catalogo');
+}
+=======
+    public function paciente() {
+        if ($_SESSION['rol'] !== 'paciente') {
+            redirect('login');
+        }
+        renderView('paciente/pac_catalogo');
+    }
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
     
     public function medico() {
     AuthHelper::checkRole('medico', true);
@@ -81,4 +111,10 @@ class PanelController {
         
         ViewHelper::renderDashboard('administrador/adm_catalogo', $data, $options);
     }
+<<<<<<< HEAD
 }
+=======
+>>>>>>> d2039bf34adef6d12dd6c79371df596a3d39fedb
+}
+?>
+>>>>>>> f341bcbb925276c3abd14e136b7a785bda722852
